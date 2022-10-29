@@ -1,0 +1,26 @@
+{
+    "name": "What is the name of your new weave?",
+    "type": "What type of item is it",
+    "length": "How long is it (in meters)?",
+    "pattern": "Which type of weave was used?",
+    "sisters": "Does it have any sisters? If so, please name them",
+    "details": "Details added (Fringes, ladders, lace, inlays etc.",
+    "date": "When was it made?",
+
+
+    "warp":{
+    "DyeStyle": "What color style is the warp?",
+    "threadcount": "How many warp threads/cm are there?",
+    "fiber": "Which fiber is in the warp?",
+    "colors": "What colors are in the warp?",
+    "threadweight": "What tickness was used in the warp (m/kg)?"
+    },
+
+    "weft":{
+    "fiber":"Which fibers is in the weft yarn?",
+    "DyeStyle": "What color style is the weft?",
+    "colors": "What colors are in the weft?",
+    "threadcount": "How many weft threads/cm are there?'",
+    "threadweight": "What tickness was used in the weft (m/kg)?"
+    }
+}
