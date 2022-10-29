@@ -47,26 +47,27 @@ function createForm() {//Creates form for user to input preferences
         //TODO: add effects of submission
     })
 }
-function createGrid(x=4,y=4, id="grid") {
+function createGrid(x=4,y=4, id="grid") {//Skapar ett table-element med x antal rader och y antal kolumner och id id.
     removeMenu();
     console.log(x,y);
     console.log('creating grid');
-    let grid = document.createElement('table');
+    let grid = document.createElement('div');
+
     console.log(grid);
-    grid.setAttribute("id", id);
+    grid.setAttribute("id", `${id}-wrapper`);
     let el = document.getElementById('content');
     el.appendChild(grid);
     for (let i = 0; i < y; i++) {
-        let row = document.createElement("tr");
+        let row = document.createElement("div");
         row.setAttribute("class", "row");
         grid.appendChild(row);
         for (let j = 0; j < x; j++) {
-            let cell = document.createElement("td");
+            let cell = document.createElement("div");
             cell.setAttribute("class", "cell");
-            cell.setAttribute("id", `${j}${i}`);
+            cell.setAttribute("id", `${id}:${j},${i}`);
            cell.addEventListener('click', event => {
                //TODO: add effects of click
-                console.log(`click on cell ${document.getElementById(`${j}${i}`).id}`);
+                console.log(`click on cell ${document.getElementById(`${id}:${j},${i}`).id}`);
             })
             row.appendChild(cell);
         }
