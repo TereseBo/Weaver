@@ -1,22 +1,25 @@
-
+*{
+    font-size: 16px;
+}
 label{
     display: block;
-    margin-bottom: 20px;
-    margin-left: 5px;
+    margin-bottom: 2rem;
+    margin-left: 0.5rem;
 }
 input{
     display: block;
-    margin-bottom: 20px;
-    margin-left: 5px;
+    margin-bottom: 2rem;
+    margin-left: 0.5rem;
 }
 .grid{
-   
+    box-sizing: border-box;
     display:inline-block;
     border: 1px solid black;
     margin: 0%;
 }
 .row{
-    height: 10px;
+    box-sizing: border-box;
+    height: 1rem;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -26,33 +29,36 @@ input{
  
 }
 .cell{
+    box-sizing: border-box;
     display: inline-block;
     padding: 100;
     border: 1px solid purple;
-    height: 10px;
-    width: 10px;
+    height: 1rem;
+    width: 1rem;
     margin:0% 0% 0% 0%;
 }
+
 #content{
     display:grid;
-    grid-template-rows: repeat(100, 1.5fr);
-    grid-template-columns: repeat(100, 1.5fr);
+    grid-template-rows: repeat(100, 1fr);
+    grid-template-columns: repeat(100, 1fr);
+    grid-gap: 1rem;
 }
 #tie-up-wrapper{
-    grid-column:52/57;
-    grid-row: 52/57;
+    grid-column:51/56;
+    grid-row: 51/56;
     background-color: mediumseagreen;
 
    
 }
 #shafts-wrapper{
     grid-column:1/51;
-    grid-row: 52/57;
+    grid-row: 51/56;
     background-color: darkkhaki;
 
 }
 #thredles-wrapper{
-    grid-column:52/57;
+    grid-column:51/56;
     grid-row: 1/51;
     background-color: coral;
 
