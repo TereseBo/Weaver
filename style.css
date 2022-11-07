@@ -43,30 +43,40 @@ input{
     grid-template-rows: repeat(100, 1fr);
     grid-template-columns: repeat(100, 1fr);
     grid-gap: 1rem;
+    width: 100vmin;
+    margin:auto
 }
 #tie-up-wrapper{
-    grid-column:51/56;
-    grid-row: 51/56;
+    grid-column-start:51;
+    grid-column-end:56;
+    grid-row-start: 51;
+    grid-row-end:56;
     background-color: mediumseagreen;
 
    
 }
 #shafts-wrapper{
-    grid-column:1/51;
-    grid-row: 51/56;
+    grid-column-start:1;
+    grid-column-end: 51;
+    grid-row-start: 51;
+    grid-row-end: 56;
     background-color: darkkhaki;
 
 }
 #thredles-wrapper{
-    grid-column:51/56;
-    grid-row: 1/51;
+    grid-column-start:51;
+    grid-column-end:56;
+    grid-row-start: 1;
+    grid-row-end:51;
     background-color: coral;
 
 
 }
 #draft-wrapper{
-    grid-column:1/51;
-    grid-row: 1/51;
+    grid-column-start:1;
+    grid-column-end:51;
+    grid-row-start: 1;
+    grid-row-end:51;
     background-color: rgb(129, 129, 234);
 
 }
