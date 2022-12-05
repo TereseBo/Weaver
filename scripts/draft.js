@@ -61,14 +61,11 @@ function getActiveColor() {//Returns the color of the color picker.
     let currentColor = document.getElementById('currentcolor').value;
     return currentColor;
 }
-function setBackgroundColorOnClick(cell) {
-    let parentElement = cell.parentElement
-    let baseColor = parentElement.style.backgroundColor;
-    let cellColor = cell.style.backgroundColor;
-    if (cellColor == baseColor) {
-        cell.style.backgroundColor = getActiveColor();
+function setBackgroundColorOnClick(cell, color = getActiveColor()) {
+    if (!isActive(cell)) {
+        cell.style.backgroundColor = color;
     } else {
-        cell.style.backgroundColor = baseColor;
+        cell.style.backgroundColor = cell.parentElement.style.backgroundColor;//TODO:add function to reset grid-color on color-reset
     }
 }
 
@@ -81,21 +78,23 @@ function onClickfunctionPicker(grid, cell) {
                 setBackgroundColorOnClick(this);
                 checkWarp(this);
                 calculateDraftfromShaft(this);
+                removeGridlines(this)
             });
 
             break;
         case "thredles":
             cell.addEventListener("click", function () {
 
-                setBackgroundColorOnClick(cell);
+                setBackgroundColorOnClick(this);
+                calculateDraftfromTredle(this);
 
 
             });
             break;
         case "tie-up":
             cell.addEventListener("click", function () {
-
-                setBackgroundColorOnClick(cell);
+                setBackgroundColorOnClick(cell, "black");
+                calculateDraftfromTieUp(this);
             });
             break;
         default:
@@ -112,28 +111,87 @@ function checkWarp(cell) {
         }
     });
 }
-
+//TODO:add function to reset warp/weft colors on color-reset?
 function calculateDraftfromShaft(cell) {
     let draft = document.getElementById('draft-wrapper');
     let tieUp = document.getElementById('tie-up-wrapper');
     let tredles = document.getElementById('thredles-wrapper');
-   let tiedUpTredles =[];
-    let currentDraftColumn=getColumnNr(cell);
+    let currentDraftColumn = getColumnNr(cell);
     draft.querySelectorAll(`[data-column="${currentDraftColumn}"]`).forEach(element => {//Set warp color for all cells in column
         element.style.backgroundColor = cell.style.backgroundColor;
+        element.dataset.thread = "warp";
     });
     tieUp.querySelectorAll(`[data-row="${getRowNr(cell)}"]`).forEach(element => {//If tied up, loop column i tredles and set weftcolor in draft if active
         if (element.style.backgroundColor !== element.parentElement.style.backgroundColor) {
             tredles.querySelectorAll(`[data-column="${getColumnNr(element)}"]`).forEach(element => {
-                if(element.style.backgroundColor !== element.parentElement.style.backgroundColor){
-                    row=getRowNr(element);
-                    draft.querySelector(`[data-row="${row}"][data-column="${currentDraftColumn}"]`).style.backgroundColor = element.style.backgroundColor;
+                if (element.style.backgroundColor !== element.parentElement.style.backgroundColor) {
+                    row = getRowNr(element);
+                    let draftCell = draft.querySelector(`[data-row="${row}"][data-column="${currentDraftColumn}"]`);
+                    draftCell.style.backgroundColor = element.style.backgroundColor;
+                    draftCell.dataset.thread = "weft";
                 }
             });
         }
     });
 }
+function calculateDraftfromTredle(cell) {
 
+    let draft = document.getElementById('draft-wrapper');
+    let currentDraftRowCells = draft.querySelectorAll(`[data-row="${getRowNr(cell)}"]`);
+    let weftcolor = cell.style.backgroundColor;
+
+    let tiedUpCells = findSameColumnIn(cell, "tie-up").filter(isActive);
+    tiedUpCells.forEach(element => {
+        let currentShaftRowCells = findSameRowIn(element, "shafts");
+        console.log(element);
+        let warpedInShaftRow = currentShaftRowCells.filter(isActive);
+        console.log(warpedInShaftRow);
+        warpedInShaftRow.forEach(cell => {
+            let draftColumnNr = getColumnNr(cell);
+            let draftCell = Array.from(currentDraftRowCells).find(cell => getColumnNr(cell) === draftColumnNr)
+            draftCell.style.backgroundColor = weftcolor;
+            draftCell.dataset.thread = "weft";
+        });
+
+    });
+
+}
+
+function calculateDraftfromTieUp(cell) {
+
+    let tredleCells = [];
+    let shaftCells = [];
+    tredleCells = findSameColumnIn(cell, 'thredles').filter(isActive)//.forEach(element => {tredleCells.push(element) });
+
+    console.log(tredleCells);
+    shaftCells = findSameRowIn(cell, 'shafts').filter(isActive);
+
+
+    tredleCells.forEach(activeTredle => {
+        let draftRowCells = [];
+        draftRowCells = findSameRowIn(activeTredle, 'draft')
+        shaftCells.forEach(activeShaft => {
+            let currentCell = draftRowCells.find(function (cell) {
+                return getColumnNr(cell) === getColumnNr(activeShaft);
+            });
+            currentCell.style.backgroundColor = activeTredle.style.backgroundColor;
+            currentCell.dataset.thread = "weft";
+        });
+    });
+
+}
+
+function isActive(cell) {
+    return cell.style.backgroundColor !== cell.parentElement.style.backgroundColor;
+}
+function findSameColumnIn(cell, grid = "draft") {
+    let columnNr = getColumnNr(cell);
+    return Array.from(document.querySelectorAll(`[data-grid="${grid}"][data-column="${columnNr}"]`));
+}
+function findSameRowIn(cell, grid = "draft") {
+    let rowNr = getRowNr(cell);
+    return Array.from(document.querySelectorAll(`[data-grid="${grid}"][data-row="${rowNr}"]`));
+}
 
 function getColumnNr(cell) {
     return cell.dataset.column;
@@ -141,21 +199,76 @@ function getColumnNr(cell) {
 function getRowNr(cellId) {
     return cellId.dataset.row;
 }
-document.addEventListener("DOMContentLoaded", function () {
+
+function getDraftCells(cell, callback) {
+    console.log(cell);
+    console.log(callback);
+    let draftCells = [];
+    draftCells[0] = callback(cell);
+    console.log(draftCells);
+    if (cell.nextElementSibling) {
+        draftCells[1] = callback(cell.nextElementSibling);
+    }
+    if (cell.previousElementSibling) {
+        draftCells[2] = callback(cell.previousElementSibling);
+    }
+    return draftCells;
+}
+function removeGridlines(cell) {
+    console.log('Här är grid-lines');
+    let adjecentCells = [];
+    let grid = cell.dataset.grid;
+    if (grid === "shafts") {
+        adjecentCells = getDraftCells(cell, findSameColumnIn);
+    }
+    else if (grid === "thredles") {
+        adjecentCells = getDraftCells(cell, findSameRowIn);
+    }
+    adjecentCells.forEach(element => {
+        let lastIndex = element.length - 1;
+
+        element.filter(cell => cell.dataset.thread === "weft").forEach(cell => {
+            cell.style.borderLeft = "none";
+            cell.style.borderRight = "none";
+            cell.style.borderTop = "";
+            cell.style.borderBottom = "";
+            //TodO: Add find cell in next row in draft and remove border-bottom if both are weft(which they are)
+        
+        });
+        element.filter(cell => cell.dataset.thread === "warp").forEach(cell => {
+            cell.style.borderLeft = "";
+            cell.style.borderRight = "";
+            cell.style.borderTop = "none";
+            cell.style.borderBottom = "none";
+
+
+
+        });
+
+        if (element[0].dataset.thread === "weft") {
+            cell.style.borderLeft = "";
+        } else if (element[0].dataset.thread === "warp") {
+            cell.style.borderTop = "";
+        }
+
+        if (element[lastIndex] === "weft") {
+            cell.style.borderRight = "";
+            cell.style.borderBottom = "";
+
+        } else if (element[lastIndex] === "warp") {
+            cell.style.borderBottom = "";
+        }
+
+
+
+    });
+
+}
+document.addEventListener("DOMContentLoaded", function () {//Runs after page-load
     draftSetUp();
-
-
 });
 
 
-//Shafts
-//Write function to change color of cells in draft grid depending on the color of the cell in the tie-up grid, thredle, and shafts grid.
-//First check if same row tie-up is filled
-//if so, check if corresponding thredle column is filled
-//if so, chande background of corresp cells in draft grid to match weft color
 
-//Thredles
-////First check if same row tie-up is filled
-//Varje ruta i grid kan ha status Upp/ner motsvarande varp-färg eller inslagsfärg
 
 
