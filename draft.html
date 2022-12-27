@@ -9,14 +9,24 @@
     <title>Draft!</title>
 </head>
 <body>
-    <aside>
-    <h1> You made it to the draft-page!!</h1>
-    <form>
-        <input type="color" id="currentcolor" name="currentcolor" value="#000000">
-    </form>
-    <p> Click in the boxes to add thread/tie-up/threading.</p>
-</aside>
+    <header>
+        <h2>You made it to the draft-page!!</h2>
+    </header>
+
 <div id="content">  </div>
+<aside>
+    <form id="colorpick">
+        <div>
+            <p> Pick a color and click in the boxes to add warp/weft/tie-up</p>
+        </div>
+        <div>
+        <input type="color" id="currentcolor" name="currentcolor" value="#000000">
+        <label for="currentcolor">Current Color</label>
+    </div>
+
+    </form>
+
+</aside>
     
 </body>
 <script>

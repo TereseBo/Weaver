@@ -1,5 +1,5 @@
-
-function createGrid(x = 4, y = 4, id = "grid") {//Skapar ett table-element med y antal rader och x antal kolumner och id id.
+//Functions in grid creation
+function createGrid(x = 4, y = 4, id = "grid") {//Creates a grid with x columns and y rows, with the id of id and appends to id="content"
     let grid = document.createElement('div');
     grid.setAttribute("id", `${id}-wrapper`);
     let el = document.getElementById('content');
@@ -17,11 +17,8 @@ function createGrid(x = 4, y = 4, id = "grid") {//Skapar ett table-element med y
             let cellName = `${id}-${j}-${i}`;
             cell.setAttribute("id", cellName);
             row.appendChild(cell);
-
-            //TODO: add effects of click
             onClickfunctionPicker(id, cell);
         }
-        //grid.appendChild(row);
     }
 }
 function adjustDraftDisplay(gridSizeX, gridSizeY, thredlePreference, shaftPreference) {//Adjusts the size of the draft grid to prevent rezising of cells when adding shafts/thredles.
@@ -49,51 +46,70 @@ function draftSetUp() {//Checks if user has set thredle/shaft preferences, if no
     (localStorage.getItem('thredleInput')) ? thredlePreference = localStorage.getItem('thredleInput') : thredlePreference = 4;
     let gridSizeX = 50;
     let gridSizeY = 50;
-    createGrid(gridSizeX, gridSizeY, "draft");
+    createGrid(gridSizeX, gridSizeY, "draft"); //TODO: add possibility to choose gridsize for draft
     createGrid(gridSizeX, shaftPreference, "shafts");
     createGrid(thredlePreference, gridSizeY, "thredles");
     createGrid(thredlePreference, shaftPreference, "tie-up");
-
-    adjustDraftDisplay(gridSizeX, gridSizeY, thredlePreference, shaftPreference);
+cssunfucker();
+    //adjustDraftDisplay(gridSizeX, gridSizeY, thredlePreference, shaftPreference);
 }
-//Functions in the actual draft
+//Functions active in draft-manipulation
 function getActiveColor() {//Returns the color of the color picker.
     let currentColor = document.getElementById('currentcolor').value;
     return currentColor;
 }
-function setBackgroundColorOnClick(cell, color = getActiveColor()) {
-    if (!isActive(cell)) {
-        cell.style.backgroundColor = color;
-    } else {
-        cell.style.backgroundColor = cell.parentElement.style.backgroundColor;//TODO:add function to reset grid-color on color-reset
-    }
+function cssunfucker(){
+    let draft = document.getElementById('draft-wrapper');
+    let shafts = document.getElementById('shafts-wrapper');
+    let thredles = document.getElementById('thredles-wrapper');
+    let tieUp = document.getElementById('tie-up-wrapper');
+let content = document.getElementById('content');
+let div=document.createElement('div');
+let div2=document.createElement('div');
+div.setAttribute("class",'partial');
+div2.setAttribute("class",'partial');
+div.appendChild(draft);
+div.appendChild(thredles);
+content.appendChild(div);
+div2.appendChild(shafts);
+div2.appendChild(tieUp);
+content.appendChild(div2);
 }
 
-function onClickfunctionPicker(grid, cell) {
+
+function setBackgroundColor(cell, color = getActiveColor()) {//Sets the background color of the cell depending on if it is active or not.
+    let result = true
+    if (!isActive(cell)) {
+        cell.style.backgroundColor = color;
+
+    } else {
+     
+        cell.style.backgroundColor = cell.parentElement.style.backgroundColor;//TODO:add function to reset grid-color on color-reset
+
+    }
+    return result;
+}
+//TODO: move function to grid creation
+function onClickfunctionPicker(grid, cell) {//Switch to determine which function to run on click.
     switch (grid) {
         case "draft":
             break;
         case "shafts":
             cell.addEventListener("click", function () {
-                setBackgroundColorOnClick(this);
+                setBackgroundColor(this);
                 checkWarp(this);
                 calculateDraftfromShaft(this);
-                removeGridlines(this)
             });
-
             break;
         case "thredles":
             cell.addEventListener("click", function () {
-
-                setBackgroundColorOnClick(this);
+                setBackgroundColor(this);
                 calculateDraftfromTredle(this);
-
-
             });
             break;
         case "tie-up":
             cell.addEventListener("click", function () {
-                setBackgroundColorOnClick(cell, "black");
+                setBackgroundColor(cell, "black");
                 calculateDraftfromTieUp(this);
             });
             break;
@@ -111,158 +127,124 @@ function checkWarp(cell) {
         }
     });
 }
-//TODO:add function to reset warp/weft colors on color-reset?
 function calculateDraftfromShaft(cell) {
-    let draft = document.getElementById('draft-wrapper');
-    let tieUp = document.getElementById('tie-up-wrapper');
-    let tredles = document.getElementById('thredles-wrapper');
-    let currentDraftColumn = getColumnNr(cell);
-    draft.querySelectorAll(`[data-column="${currentDraftColumn}"]`).forEach(element => {//Set warp color for all cells in column
-        element.style.backgroundColor = cell.style.backgroundColor;
-        element.dataset.thread = "warp";
-    });
-    tieUp.querySelectorAll(`[data-row="${getRowNr(cell)}"]`).forEach(element => {//If tied up, loop column i tredles and set weftcolor in draft if active
-        if (element.style.backgroundColor !== element.parentElement.style.backgroundColor) {
-            tredles.querySelectorAll(`[data-column="${getColumnNr(element)}"]`).forEach(element => {
-                if (element.style.backgroundColor !== element.parentElement.style.backgroundColor) {
-                    row = getRowNr(element);
-                    let draftCell = draft.querySelector(`[data-row="${row}"][data-column="${currentDraftColumn}"]`);
-                    draftCell.style.backgroundColor = element.style.backgroundColor;
-                    draftCell.dataset.thread = "weft";
-                }
-            });
-        }
+
+    let currentDraftColumnCells = findSameColumnIn(cell, "draft");
+    currentDraftColumnCells.forEach(element => {
+        calculateDraftfromDraft(element);
     });
 }
 function calculateDraftfromTredle(cell) {
-
-    let draft = document.getElementById('draft-wrapper');
-    let currentDraftRowCells = draft.querySelectorAll(`[data-row="${getRowNr(cell)}"]`);
-    let weftcolor = cell.style.backgroundColor;
-
-    let tiedUpCells = findSameColumnIn(cell, "tie-up").filter(isActive);
-    tiedUpCells.forEach(element => {
-        let currentShaftRowCells = findSameRowIn(element, "shafts");
-        console.log(element);
-        let warpedInShaftRow = currentShaftRowCells.filter(isActive);
-        console.log(warpedInShaftRow);
-        warpedInShaftRow.forEach(cell => {
-            let draftColumnNr = getColumnNr(cell);
-            let draftCell = Array.from(currentDraftRowCells).find(cell => getColumnNr(cell) === draftColumnNr)
-            draftCell.style.backgroundColor = weftcolor;
-            draftCell.dataset.thread = "weft";
-        });
-
+    let currentDraftRowCells = findSameRowIn(cell, "draft");
+    currentDraftRowCells.forEach(element => {
+        calculateDraftfromDraft(element);
     });
-
 }
 
 function calculateDraftfromTieUp(cell) {
-
-    let tredleCells = [];
-    let shaftCells = [];
-    tredleCells = findSameColumnIn(cell, 'thredles').filter(isActive)//.forEach(element => {tredleCells.push(element) });
-
-    console.log(tredleCells);
-    shaftCells = findSameRowIn(cell, 'shafts').filter(isActive);
-
-
-    tredleCells.forEach(activeTredle => {
-        let draftRowCells = [];
-        draftRowCells = findSameRowIn(activeTredle, 'draft')
-        shaftCells.forEach(activeShaft => {
-            let currentCell = draftRowCells.find(function (cell) {
-                return getColumnNr(cell) === getColumnNr(activeShaft);
-            });
-            currentCell.style.backgroundColor = activeTredle.style.backgroundColor;
-            currentCell.dataset.thread = "weft";
+    let currentShaftcells = findSameRowIn(cell, "shafts");
+    let activeInShaft = currentShaftcells.filter(isActive);
+    activeInShaft.forEach(element => {
+        findSameColumnIn(element, "draft").forEach(element => {
+            calculateDraftfromDraft(element);
         });
     });
-
 }
 
 function isActive(cell) {
     return cell.style.backgroundColor !== cell.parentElement.style.backgroundColor;
 }
 function findSameColumnIn(cell, grid = "draft") {
-    let columnNr = getColumnNr(cell);
+    let columnNr = cell.dataset.column;
     return Array.from(document.querySelectorAll(`[data-grid="${grid}"][data-column="${columnNr}"]`));
 }
 function findSameRowIn(cell, grid = "draft") {
-    let rowNr = getRowNr(cell);
+    let rowNr = cell.dataset.row;
     return Array.from(document.querySelectorAll(`[data-grid="${grid}"][data-row="${rowNr}"]`));
 }
 
-function getColumnNr(cell) {
-    return cell.dataset.column;
-}
-function getRowNr(cellId) {
-    return cellId.dataset.row;
-}
+function calculateDraftfromDraft(cell) {
 
-function getDraftCells(cell, callback) {
-    console.log(cell);
-    console.log(callback);
-    let draftCells = [];
-    draftCells[0] = callback(cell);
-    console.log(draftCells);
-    if (cell.nextElementSibling) {
-        draftCells[1] = callback(cell.nextElementSibling);
-    }
-    if (cell.previousElementSibling) {
-        draftCells[2] = callback(cell.previousElementSibling);
-    }
-    return draftCells;
-}
-function removeGridlines(cell) {
-    console.log('Här är grid-lines');
-    let adjecentCells = [];
-    let grid = cell.dataset.grid;
-    if (grid === "shafts") {
-        adjecentCells = getDraftCells(cell, findSameColumnIn);
-    }
-    else if (grid === "thredles") {
-        adjecentCells = getDraftCells(cell, findSameRowIn);
-    }
-    adjecentCells.forEach(element => {
-        let lastIndex = element.length - 1;
+    let warpCell = findSameColumnIn(cell, 'shafts').find(isActive);
+    let weftCells = findSameRowIn(cell, 'thredles').filter(isActive);
+    if (warpCell && weftCells.length > 0) {
 
-        element.filter(cell => cell.dataset.thread === "weft").forEach(cell => {
-            cell.style.borderLeft = "none";
-            cell.style.borderRight = "none";
-            cell.style.borderTop = "";
-            cell.style.borderBottom = "";
-            //TodO: Add find cell in next row in draft and remove border-bottom if both are weft(which they are)
-        
-        });
-        element.filter(cell => cell.dataset.thread === "warp").forEach(cell => {
-            cell.style.borderLeft = "";
-            cell.style.borderRight = "";
-            cell.style.borderTop = "none";
-            cell.style.borderBottom = "none";
+        let tiedUpCells = findSameRowIn(warpCell, 'tie-up').filter(isActive);
+  
+        if (tiedUpCells.length > 0) {
 
+            let tieUps = tiedUpCells.map(cell => cell.dataset.column);
 
-
-        });
-
-        if (element[0].dataset.thread === "weft") {
-            cell.style.borderLeft = "";
-        } else if (element[0].dataset.thread === "warp") {
-            cell.style.borderTop = "";
+            weftCells.forEach(weftCell => {
+                let thisTredle = weftCell.dataset.column;
+                if (tieUps.includes(thisTredle)) {
+                    cell.style.backgroundColor = weftCell.style.backgroundColor;
+                    cell.dataset.thread = "weft";
+                } else {
+                    cell.style.backgroundColor = warpCell.style.backgroundColor;
+                    cell.dataset.thread = "warp";
+                }
+            });
+        } else {
+            cell.style.backgroundColor = warpCell.style.backgroundColor;
+            cell.dataset.thread = "warp";
         }
 
-        if (element[lastIndex] === "weft") {
-            cell.style.borderRight = "";
-            cell.style.borderBottom = "";
+    }
+    else if (warpCell && weftCells.length === 0) {
 
-        } else if (element[lastIndex] === "warp") {
-            cell.style.borderBottom = "";
-        }
+        cell.style.backgroundColor = warpCell.style.backgroundColor;
+        cell.dataset.thread = "warp";
+    }
+    else if (!warpCell && weftCells.length > 0) {
+        cell.style.backgroundColor = weftCells[0].style.backgroundColor;
+        cell.dataset.thread = "weft";
+    }
+    else if(!warpCell && weftCells.length === 0){
+        cell.style.backgroundColor = cell.parentElement.style.backgroundColor;
+        cell.dataset.thread = "none";
+    }
+    fixGridLines(cell);
+
+}
+function fixGridLines(cell) {
+    let borderThickness = "0.5px";
+    if (cell.dataset.thread === "warp") {
+        cell.style.borderTop = "none";
+        cell.style.borderTopColor="";
+        cell.style.borderBottom = "none";
+        cell.style.borderBottomColor="";
+        cell.style.borderLeft = "";
+        cell.style.borderRight = "";
+        cell.style.borderTopWidth = "";
+        cell.style.borderBottomWidth = "";
+        cell.style.borderRightWidth = borderThickness;
+        cell.style.borderLeftWidth = borderThickness;
 
 
-
-    });
-
+    }
+    else if (cell.dataset.thread === "weft") {
+        cell.style.borderLeft = "none";
+        cell.style.borderLeftColor="";
+        cell.style.borderRight = "none";
+        cell.style.borderRightColor="";
+        cell.style.borderTop = "";
+        cell.style.borderBottom = "";
+        cell.style.borderLeftWidth = "";
+        cell.style.borderRightWidth = "";
+        cell.style.borderTopWidth = borderThickness;
+        cell.style.borderBottomWidth = borderThickness;
+    }
+    else{
+        cell.style.borderLeft = "";
+        cell.style.borderRight = "";
+        cell.style.borderTop = "";
+        cell.style.borderBottom = "";
+        cell.style.borderLeftWidth = "";
+        cell.style.borderRightWidth = "";
+        cell.style.borderTopWidth = "";
+        cell.style.borderBottomWidth = "";
+    }
 }
 document.addEventListener("DOMContentLoaded", function () {//Runs after page-load
     draftSetUp();
