@@ -1,8 +1,8 @@
 //Functions in grid creation
-function createGrid(x = 4, y = 4, id = "grid") {//Creates a grid with x columns and y rows, with the id of id and appends to id="content"
+function createGrid(x = 4, y = 4, id = "grid") {//Creates a grid with x columns and y rows, with the id of id and appends to id="chart"
     let grid = document.createElement('div');
     grid.setAttribute("id", `${id}-wrapper`);
-    let el = document.getElementById('content');
+    let el = document.getElementById('chart');
     el.appendChild(grid);
     for (let i = 0; i < y; i++) {
         let row = document.createElement("div");
@@ -22,7 +22,7 @@ function createGrid(x = 4, y = 4, id = "grid") {//Creates a grid with x columns 
     }
 }
 function adjustDraftDisplay(gridSizeX, gridSizeY, thredlePreference, shaftPreference) {//Adjusts the size of the draft grid to prevent rezising of cells when adding shafts/thredles.
-    let el = document.getElementById('content');
+    let el = document.getElementById('chart');
     let draft = document.getElementById('draft-wrapper');
     let shafts = document.getElementById('shafts-wrapper');
     let thredles = document.getElementById('thredles-wrapper');
@@ -63,17 +63,17 @@ function cssunfucker(){
     let shafts = document.getElementById('shafts-wrapper');
     let thredles = document.getElementById('thredles-wrapper');
     let tieUp = document.getElementById('tie-up-wrapper');
-let content = document.getElementById('content');
+let chart = document.getElementById('chart');
 let div=document.createElement('div');
 let div2=document.createElement('div');
 div.setAttribute("class",'partial');
 div2.setAttribute("class",'partial');
 div.appendChild(draft);
 div.appendChild(thredles);
-content.appendChild(div);
+chart.appendChild(div);
 div2.appendChild(shafts);
 div2.appendChild(tieUp);
-content.appendChild(div2);
+chart.appendChild(div2);
 }
 
 
@@ -246,7 +246,7 @@ function fixGridLines(cell) {
         cell.style.borderBottomWidth = "";
     }
 }
-export { draftSetUp, getActiveColor};
+export { draftSetUp, isActive};
 
 
 

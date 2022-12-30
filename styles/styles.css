@@ -75,7 +75,7 @@ aside {
   box-sizing: border-box;
 }
 
-#content {
+#chart {
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -84,44 +84,44 @@ aside {
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
-#content .partial {
+#chart .partial {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   gap: 1rem;
   justify-content: center;
 }
-#content .partial #shafts-wrapper {
+#chart .partial #shafts-wrapper {
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
   background-color: darkkhaki;
 }
-#content .partial #tie-up-wrapper {
+#chart .partial #tie-up-wrapper {
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
   background-color: mediumseagreen;
 }
-#content .partial #draft-wrapper {
+#chart .partial #draft-wrapper {
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
   background-color: rgb(129, 129, 234);
 }
-#content .partial #thredles-wrapper {
+#chart .partial #thredles-wrapper {
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
   background-color: coral;
 }
-#content .partial .grid {
+#chart .partial .grid {
   box-sizing: border-box;
   display: inline-block;
   border: 1px solid black;
   margin: 0%;
 }
-#content .partial .row {
+#chart .partial .row {
   box-sizing: border-box;
   height: 1rem;
   display: flex;
@@ -130,7 +130,7 @@ aside {
   padding: 0% 0% 0% 0%;
   grid-column: inherit;
 }
-#content .partial .row .cell {
+#chart .partial .row .cell {
   box-sizing: border-box;
   display: inline-block;
   padding: 100;
