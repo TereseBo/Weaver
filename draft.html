@@ -4,29 +4,34 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <script src="/scripts/draft.js"></script>
+    <link rel="stylesheet" href="./styles/styles.css">
+
+    <script src="/scripts/draftPage.js" type="module"></script>
     <title>Draft!</title>
 </head>
 <body>
     <header>
         <h2>You made it to the draft-page!!</h2>
     </header>
+    <aside>
+        <form id="colorpick-form">
+            <div class="form-content-container"> 
+            <div id="colorpick-text">
+                <p> Pick a color and click <br> to add warp/weft/tie-up</p>
+            </div>
+            <div id="colorpick-box">
+                <label for="currentcolor">Current Color</label>
+            <input type="color" id="currentcolor" name="currentcolor" value="#000000">
+        </div>
+         
+        </div>
+    
+        </form>
+    
+    </aside>
 
 <div id="content">  </div>
-<aside>
-    <form id="colorpick">
-        <div>
-            <p> Pick a color and click in the boxes to add warp/weft/tie-up</p>
-        </div>
-        <div>
-        <input type="color" id="currentcolor" name="currentcolor" value="#000000">
-        <label for="currentcolor">Current Color</label>
-    </div>
 
-    </form>
-
-</aside>
     
 </body>
 <script>

@@ -64,5 +64,5 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 });
-//Functions for greating draft
+
 
