@@ -17,9 +17,14 @@ function getWeftColors() {//returns a set of weft colors used in the draft
     weftColors = new Set(weftColors);
     return weftColors;
 }
-function createYarnList(arr, thread) {
-    console.log("started createYarnList")
-    console.log(arr);
+function checkForDuplicates(thread) {//checks for duplicates of info
+    if(document.getElementById(`${thread}-list`)) {
+        document.getElementById(`${thread}-list`).remove();
+    }
+
+}
+function createYarnList(arr, thread) {//creates a list of yarns for the warp or weft
+    checkForDuplicates(thread);
     let yarnList = document.createElement('div');
     yarnList.id = `${thread}-list`;
     yarnList.classList.add('yarn-list');
@@ -54,21 +59,36 @@ function createYarnList(arr, thread) {
         yarnList.appendChild(yarnContainer);
     });
 }
-function generateYarnLists() {
+function generateYarnLists() {//generates the warp and weft yarn lists
     let info = document.getElementById('info');
     let yarnListContainer = document.createElement('div');
     yarnListContainer.id = 'click-draft-yarn-list-container';
     yarnListContainer.classList.add('yarn-list-container');
-    info.appendChild(yarnListContainer);
+    info.prepend(yarnListContainer); 
     createYarnList(getWarpColors(), 'warp');
     createYarnList(getWeftColors(), 'weft');
 }
-function tester() {
+function addInfo() {//Adds buttons for adding optional info to the draft
     let place = document.getElementById('info');
-    let testButton = document.createElement('button');
-    testButton.textContent = 'test';
-    testButton.addEventListener('click',()=> generateYarnLists());
-    place.appendChild(testButton)
+    let yarnButton = document.createElement('button');
+    let projectButton = document.createElement('button');
+    yarnButton.textContent = 'Add yarn info';
+    projectButton.textContent = 'Add project info';
+    yarnButton.addEventListener('click', () => generateYarnLists());
+    projectButton.addEventListener('click', () => console.log('project info'));
+    place.appendChild(projectButton);
+    place.appendChild(yarnButton)
+
+
+}
+function draftInfoSetUp() {
+    let info = document.getElementById('info');
+    let infoContainer = document.createElement('div');
+    infoContainer.id = 'info-container';
+    info.appendChild(infoContainer);
+    let infoHeader = document.createElement('h3');
+    infoHeader.textContent = 'Additional info';
+    
 }
 
-export { tester }
+export { addInfo }

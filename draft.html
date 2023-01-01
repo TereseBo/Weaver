@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,38 +10,68 @@
     <script src="/scripts/draftPage.js" type="module"></script>
     <title>Draft!</title>
 </head>
+
 <body>
     <header>
         <h2>You made it to the draft-page!!</h2>
     </header>
     <aside>
         <form id="colorpick-form">
-            <div class="form-content-container"> 
-            <div id="colorpick-text">
-                <p> Pick a color and click <br> to add warp/weft/tie-up</p>
+            <div class="form-content-container">
+                <div id="colorpick-text">
+                    <p> Pick a color and click <br> to add warp/weft/tie-up</p>
+                </div>
+                <div id="colorpick-box">
+                    <label for="currentcolor">Current Color</label>
+                    <input type="color" id="currentcolor" name="currentcolor" value="#000000">
+                </div>
+
             </div>
-            <div id="colorpick-box">
-                <label for="currentcolor">Current Color</label>
-            <input type="color" id="currentcolor" name="currentcolor" value="#000000">
-        </div>
-         
-        </div>
-    
+
         </form>
-    
+
     </aside>
 
-<div id="content">  
-<div id="chart">
-</div>
-<div id="info">
-    
-</div>
-</div>
+    <div id="content">
+        <div id="chart">
+        </div>
+        <div id="info">
 
-    
+            <div class="additional-info-container">
+                <form class="additional-info">
+                    <div class="info-container">
+                        <label for="heddle">Reed</label>
+                        <input type="number" id="heddle-dents" name="heddle" min="1" max="100" placeholder="50">
+                        /
+                        <input type="number" id="heddle-" name="heddle" min="1" max="100" value="10">
+                    </div>
+                    <div class="info-container">
+                        <label for="tieup">Threding</label>
+                        <input type="number" id="threads-heddle" name="tieup" min="1" max="10" placeholder="1">
+                        
+                        <label for="threads-heddle">/heddle </label>
+                        <input type="number" id="threads-dent" name="tieup" min="1" max="10" value="2">
+                        <label for="threads-dent">/dent </label>
+                    </div>
+                    <div class="info-container">
+                        <label for="warp">Sett</label>
+                        <label for="warp-sett">warp </label>
+                        <input type="number" id="warp-sett" name="warp" min="1" max="100" placeholder="10"> ends/cm
+                        <label for="weft-sett">weft </label>
+                        <input type="number" id="weft-sett" name="warp" min="1" max="100" value="10"> ends/cm
+
+                </form>
+
+
+            </div>
+
+        </div>
+    </div>
+
+
 </body>
 <script>
 
 </script>
+
 </html>
