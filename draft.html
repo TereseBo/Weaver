@@ -37,29 +37,34 @@
         </div>
         <div id="info">
 
-            <div class="additional-info-container">
+            <div class="additional-info-container" id="project-info-container">
                 <form class="additional-info">
                     <div class="info-container">
-                        <label for="heddle">Reed</label>
-                        <input type="number" id="heddle-dents" name="heddle" min="1" max="100" placeholder="50">
+                        <h3 class="info-post-header">Reed:</h3>
+                        <div class="info-post">
+                        <input type="number" id="heddle-dents" name="heddle" min="1" max="100" value="50" >
                         /
                         <input type="number" id="heddle-" name="heddle" min="1" max="100" value="10">
                     </div>
+                    </div>
                     <div class="info-container">
-                        <label for="tieup">Threding</label>
-                        <input type="number" id="threads-heddle" name="tieup" min="1" max="10" placeholder="1">
+                        <h3 class="info-post-header">Threding:</h3>
+                        <div class="info-post">
+                        <input type="number" id="threads-heddle" name="tieup" min="1" max="10" value="1">
                         
                         <label for="threads-heddle">/heddle </label>
                         <input type="number" id="threads-dent" name="tieup" min="1" max="10" value="2">
                         <label for="threads-dent">/dent </label>
+                        </div>
                     </div>
                     <div class="info-container">
-                        <label for="warp">Sett</label>
+                        <h3 class="info-post-header">Ends/cm:</h3>
+                        <div class="info-post">
                         <label for="warp-sett">warp </label>
-                        <input type="number" id="warp-sett" name="warp" min="1" max="100" placeholder="10"> ends/cm
+                        <input type="number" id="warp-sett" name="warp" min="1" max="100" value="10">
                         <label for="weft-sett">weft </label>
-                        <input type="number" id="weft-sett" name="warp" min="1" max="100" value="10"> ends/cm
-
+                        <input type="number" id="weft-sett" name="warp" min="1" max="100" value="10"> 
+                    </div>
                 </form>
 
 

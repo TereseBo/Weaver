@@ -75,7 +75,7 @@ function addInfo() {//Adds buttons for adding optional info to the draft
     yarnButton.textContent = 'Add yarn info';
     projectButton.textContent = 'Add project info';
     yarnButton.addEventListener('click', () => generateYarnLists());
-    projectButton.addEventListener('click', () => console.log('project info'));
+    projectButton.addEventListener('click', () => draftInfoSetUp());
     place.appendChild(projectButton);
     place.appendChild(yarnButton)
 
@@ -88,6 +88,7 @@ function draftInfoSetUp() {
     info.appendChild(infoContainer);
     let infoHeader = document.createElement('h3');
     infoHeader.textContent = 'Additional info';
+    document.getElementById('project-info-container').style.display = 'flex';
     
 }
 
