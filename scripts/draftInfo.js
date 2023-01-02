@@ -1,4 +1,5 @@
 import { isActive } from './draftChart.js';
+import { calculateWarpEnds, calculateWarpEpi, calculateWeaveWidth } from './calc.js';
 function getWarpColors() {//returns a set of warp colors used in the draft
     let warpColors = [];
     let warpCells = Array.from(document.querySelectorAll('[data-grid=shafts]')).filter(isActive);
@@ -25,6 +26,7 @@ function checkForDuplicates(thread) {//checks for duplicates of info
 }
 function createYarnList(arr, thread) {//creates a list of yarns for the warp or weft
     checkForDuplicates(thread);
+    if(!arr.isEmpty) {
     let yarnList = document.createElement('div');
     yarnList.id = `${thread}-list`;
     yarnList.classList.add('yarn-list');
@@ -59,12 +61,16 @@ function createYarnList(arr, thread) {//creates a list of yarns for the warp or 
         yarnList.appendChild(yarnContainer);
     });
 }
+}
 function generateYarnLists() {//generates the warp and weft yarn lists
+    if(!document.getElementById('click-draft-yarn-list-container')) {
     let info = document.getElementById('info');
     let yarnListContainer = document.createElement('div');
     yarnListContainer.id = 'click-draft-yarn-list-container';
     yarnListContainer.classList.add('yarn-list-container');
-    info.prepend(yarnListContainer); 
+    info.prepend(yarnListContainer);
+    } 
+
     createYarnList(getWarpColors(), 'warp');
     createYarnList(getWeftColors(), 'weft');
 }
@@ -75,21 +81,59 @@ function addInfo() {//Adds buttons for adding optional info to the draft
     yarnButton.textContent = 'Add yarn info';
     projectButton.textContent = 'Add project info';
     yarnButton.addEventListener('click', () => generateYarnLists());
-    projectButton.addEventListener('click', () => draftInfoSetUp());
+    projectButton.addEventListener('click', () => displayDraftInfo());
     place.appendChild(projectButton);
     place.appendChild(yarnButton)
+   // addInputCalculations();
 
 
 }
-function draftInfoSetUp() {
-    let info = document.getElementById('info');
-    let infoContainer = document.createElement('div');
-    infoContainer.id = 'info-container';
-    info.appendChild(infoContainer);
-    let infoHeader = document.createElement('h3');
-    infoHeader.textContent = 'Additional info';
+function displayDraftInfo() {//Displays the project info form
+
     document.getElementById('project-info-container').style.display = 'flex';
     
 }
+
+function addInputCalculations() {//Adds calculations to the input fields
+    let warpEpiInput = document.getElementById('warp-sett');
+    let warpEndsInput = document.getElementById('threads');
+    let warpWidthInput = document.getElementById('warp-width');
+    warpEpiInput.addEventListener('input', () => {
+        let warpEpi = warpEpiInput.value;
+        let warpEnds = warpEndsInput.value;
+        let warpWidth = warpWidthInput.value;
+        if(warpEnds) {
+            warpWidthInput.value = calculateWeaveWidth(warpEnds, warpEpi);
+        }
+        else if(warpWidth) {
+            warpEndsInput.value = calculateWarpEnds(warpEpi, warpWidth);
+            
+        }
+    });
+    warpEndsInput.addEventListener('input', () => {
+        let warpEpi = warpEpiInput.value;
+        let warpEnds = warpEndsInput.value;
+        let warpWidth = warpWidthInput.value;
+        if(warpEpi) {
+            warpWidthInput.value = calculateWeaveWidth(warpEnds, warpEpi);
+        }
+        else if(warpWidth) {
+            warpEpiInput.value = calculateWarpEpi(warpEnds, warpWidth);
+        }
+    });
+    warpWidthInput.addEventListener('input', () => {
+        let warpEpi = warpEpiInput.value;
+        let warpEnds = warpEndsInput.value;
+        let warpWidth = warpWidthInput.value;
+        if(warpEpi) {
+            warpEndsInput.value = calculateWarpEnds(warpEpi, warpWidth);
+        }
+        else if(warpEnds) {
+            warpEpiInput.value = calculateWarpEpi(warpEnds, warpWidth);
+        }
+    });
+
+}
+
 
 export { addInfo }
