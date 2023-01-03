@@ -74,6 +74,7 @@ function generateYarnLists() {//generates the warp and weft yarn lists
     createYarnList(getWarpColors(), 'warp');
     createYarnList(getWeftColors(), 'weft');
 }
+//TODO: Fix button styles
 function addInfo() {//Adds buttons for adding optional info to the draft
     let place = document.getElementById('info');
     let yarnButton = document.createElement('button');
