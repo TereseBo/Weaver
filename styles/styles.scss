@@ -1,6 +1,8 @@
 @use 'mixins.scss';
+@use 'variables.scss';
 
 body {
+    background-color: variables.$base-color;
 
 
     a {
@@ -20,6 +22,7 @@ body {
 
     input {
         margin: 0;
+        background-color: variables.$secondary-color;
     }
 
     font-size: 1rem;
@@ -79,8 +82,8 @@ aside {
 
     .form-content-container {
 
-        border: 2px solid black;
-        background-color: aliceblue;
+        border: variables.$thick-border;
+        @include mixins.text-area;
         padding: 1rem;
         display: flex;
         flex-direction: row;
@@ -136,6 +139,7 @@ aside {
     margin: auto;
     padding-top: 1rem;
     padding-bottom: 1rem;
+    overflow-x: scroll;
 
     .partial {
         display: flex;
@@ -148,37 +152,19 @@ aside {
             display: flex;
             flex-direction: column;
             flex-wrap: nowrap;
-            background-color: darkkhaki;
         }
 
-        #tie-up-wrapper {
-            display: flex;
-            flex-direction: column;
-            flex-wrap: nowrap;
-            background-color: mediumseagreen;
-        }
-
-        #draft-wrapper {
-
-            display: flex;
-            flex-direction: column;
-            flex-wrap: nowrap;
-            background-color: rgb(129, 129, 234);
-        }
-
-        #thredles-wrapper {
-            display: flex;
-            flex-direction: column;
-            flex-wrap: nowrap;
-            background-color: coral;
-        }
-
+        #tie-up-wrapper,
+        #draft-wrapper,
+        #thredles-wrapper,
+        #shafts-wrapper,
         .grid {
-            box-sizing: border-box;
-            display: inline-block;
-            border: 1px solid black;
-            margin: 0%;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            outline: variables.$thin-border
         }
+
 
         .row {
             box-sizing: border-box;
@@ -193,7 +179,7 @@ aside {
                 box-sizing: border-box;
                 display: inline-block;
                 padding: 100;
-                border: 1px solid purple;
+                border: variables.$thin-border;
                 height: 1rem;
                 width: 1rem;
                 margin: 0% 0% 0% 0%;
@@ -204,12 +190,16 @@ aside {
 
 #info {
     .yarn-list-container {
-        @include mixins.flexRow;
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
         padding: 1rem;
+        align-items: flex-start;
+        justify-content: center;
 
         .yarn-list {
             @include mixins.flexColumn;
-            border: 1px solid black;
+            @include mixins.text-area;
             padding: 1rem;
 
             h3 {
@@ -225,6 +215,7 @@ aside {
                     display: inline-block;
                     width: 1.5rem;
                     height: 1.5rem;
+                    border: variables.$thin-border;
 
                 }
 
@@ -249,12 +240,13 @@ aside {
         box-sizing: border-box;
 
         .info-form {
+            @include mixins.text-area;
 
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
             align-items: flex-start;
-            border: 1px solid black;
+            border: variables.$thin-border;
             padding: 1rem 1rem 1rem 1rem;
             box-sizing: border-box;
 
@@ -330,9 +322,10 @@ aside {
                 margin: 0;
                 padding: 0;
                 width: 50%;
-                min-width: 80px;
+                min-width: 100px;
                 text-align: end;
                 margin-right: 1rem;
+                white-space: nowrap;
             }
 
             input {
@@ -343,22 +336,30 @@ aside {
         }
 
         .item-data {
-            border: 1px solid black;
-            padding: 0.5rem;
-           // background-color: coral;
-            display: flex;
-            flex-direction: row;
-            input{
-                display: inline;
-                width: 5ex;
-                margin: 0 0.25rem 0 0.25rem;
-                text-align: center;
+            @include mixins.flexColumn;
+            margin: 0%;
+            border: variables.$thin-border;
+            border-style: solid none none none;
+
+
+            h6 {
+                margin: 0;
+                padding-top:1rem;
             }
-            label{
-                margin-left: 1rem;
+
+            &:last-child {
+                border-bottom-style: solid ;
             }
-            
+
+            .data {
+
+                &:last-child {
+                    padding-bottom: 1rem;
+                }
+            }
         }
+
+
 
     }
 

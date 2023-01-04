@@ -1,3 +1,5 @@
+@use 'variables.scss';
+
 @mixin baseText{
     font-size: 1rem;
     font-family: 'Courier New', Courier, monospace;
@@ -11,11 +13,18 @@
     border: none;
     //background-color: inherit;
     cursor: pointer;
-    background-color: rgb(58, 9, 90);
+    background-color:variables.$accent-color1;
+    color: variables.$secondary-color;
+
     padding: 0.5rem;
     &:hover{
         background-color: rgb(118, 56, 141);
     }
+}
+@mixin text-area{
+    background-color: variables.$secondary-color;
+    color: variables.$accent-color1;
+    border: variables.$thin-border;
 }
 
 @mixin flexColumn{

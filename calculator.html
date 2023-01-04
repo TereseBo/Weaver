@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles/styles.css">
+    <script src="/scripts/calcPage.js"></script>
 
     <title>Calculator</title>
 </head>
@@ -13,20 +14,21 @@
 <body>
     <header>
         <h1> Welcome to the weaving project creator!</h1>
-        <p> Start by registering your project information. If you don't know what you're making yet, go to draft instead.</p>
-    
+        <p> Start by registering your project information. If you don't know what you're making yet, go to draft
+            instead.</p>
+
         <nav id="menu">
-        <button id="preferences" onClick="window.location.href='index.html'" >
-            Register preferences
-        </button>
-        <button onClick="window.location.href='draft.html'">
-            Create draft
-        </button>
-        <button onClick="window.location.href='calculator.html'">
-            Calculator
-        </button>
-    
-    </nav>
+            <button id="preferences" onClick="window.location.href='index.html'">
+                Register preferences
+            </button>
+            <button onClick="window.location.href='draft.html'">
+                Create draft
+            </button>
+            <button onClick="window.location.href='calculator.html'">
+                Calculator
+            </button>
+
+        </nav>
     </header>
     <div id="calculator">
 
@@ -53,21 +55,31 @@
                 <label for="items">Nr of items </label>
                 <input type="number" id="items" name="items" min="1" max="99" value="4">
             </div>
-            <div  id="items">
-                <div class="item-data" >
-                    Item: 1
-                    <label for="fringes">Fringe</label>
-                    <input type="number" id="fringe" name="fringe" min="1" max="99" value="10"> cm
-                    <label for="hem">Hem </label>
-                    <input type="number" id="hem" name="hem" min="1" max="99" value="10"> cm
-                    <label for="item-length">length </label>
-                    <input type="number" id="item-length" name="item-length" min="1" max="999" value="10"> cm
+            <div id="items-container">
+                <div class="item-data" id="item-box" style="display: none;">
+                    <h6>Item</h6>
+
+                    <div class="data">
+                        <label for="width">Item length</label>
+                        <input type="number" id="length" name="width" min="1" max="99" value="10"> cm
+                    </div>
+                    <div class="data">
+                        <label for="width">Fringe / hem</label>
+                        <input type="number" id="firsthem" name="firsthem" min="1" max="99" value="10"> cm
+                    </div>
+                    <div class="data">
+                        <label for="width">Fringe / hem</label>
+                        <input type="number" id="secondhem" name="secondhem" min="1" max="99" value="10"> cm
+                    </div>
+
+
+
                 </div>
             </div>
-                <div class="data">
-                    <label for="total">Warp length </label>
-                    <input type="number" id="total" name="total" min="1" max="99" value="940">
-                </div>
+            <div class="data">
+                <label for="total">Warp length </label>
+                <input type="number" id="total" name="total" min="1" max="99" value="940">
+            </div>
 
 
 
