@@ -92,7 +92,6 @@ function collectUserPreferences() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-    console.log("DOM fully loaded and parsed");
     document.getElementById('preferences').addEventListener('click', collectUserPreferences);
     
 
