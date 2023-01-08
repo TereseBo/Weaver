@@ -80,7 +80,6 @@ function createForm() {//Creates form for user to input preferences
 function setUserPreferences() {
     let shaftInput = document.getElementById('shafts').value;
     let thredleInput = document.getElementById('thredles').value;
-    console.log(shaftInput, thredleInput);
     localStorage.setItem('shaftInput', shaftInput);
     localStorage.setItem('thredleInput', thredleInput);
     
