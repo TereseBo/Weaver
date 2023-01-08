@@ -3,6 +3,8 @@
 
 body {
     background-color: variables.$base-color;
+    color: variables.$accent-color1;
+    @include mixins.baseText;
 
 
     a {
@@ -18,32 +20,86 @@ body {
 
     label {
         margin: 0;
+        white-space: nowrap;
     }
 
     input {
         margin: 0;
+        padding: 0  ;
         background-color: variables.$secondary-color;
     }
+
+
 
     font-size: 1rem;
     font-family: 'Courier New',
     Courier,
     monospace;
 
+
+
 }
 
 header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 1rem;
+@include mixins.nav-container;
 
     nav {
-        display: flex;
-        flex-direction: row;
-        gap: 1rem;
-        justify-items: center;
-        justify-content: center;
+        @include mixins.nav;
+    }
+}
+
+//index.html
+.form-container {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    padding: 1rem;
+    justify-content: center;
+    
+    
+    
+
+    #preferences-form {
+        @include mixins.text-area;
+        @include mixins.flexColumn;
+        padding: 1.5rem;
+        box-sizing: border-box;
+
+        h5{
+            margin: 0;
+            padding: 0 0 0.5rem 0;
+            font-size: 1.2rem;
+        }
+
+        div{
+            width: 100%;
+            box-sizing: border-box;
+            @include mixins.flexRow;
+            align-items: flex-end;
+            justify-content: flex-end;
+        }
+
+        label {
+            box-sizing: border-box;
+            text-align: end;
+            
+        }
+        input{
+            width: 3ex;
+            border-width: 1px;
+            border-color: rgb(124, 119, 119);
+            border-style: none none solid none;
+            text-align: center;
+
+            &[type=submit]{
+                margin-top: 0.5rem;
+                @include mixins.buttonOrLink;
+                width: 50%;
+            }
+        }
+
+        
+
     }
 }
 
@@ -139,7 +195,6 @@ aside {
     margin: auto;
     padding-top: 1rem;
     padding-bottom: 1rem;
-    overflow-x: scroll;
 
     .partial {
         display: flex;
@@ -186,6 +241,9 @@ aside {
             }
         }
     }
+}
+#options-container{
+    @include mixins.nav;
 }
 
 #info {
@@ -344,11 +402,11 @@ aside {
 
             h6 {
                 margin: 0;
-                padding-top:1rem;
+                padding-top: 1rem;
             }
 
             &:last-child {
-                border-bottom-style: solid ;
+                border-bottom-style: solid;
             }
 
             .data {

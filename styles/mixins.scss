@@ -5,8 +5,6 @@
     font-family: 'Courier New', Courier, monospace;
     text-decoration: none;
     text-align: center;
-    color: whitesmoke;
-
 }
 
 @mixin buttonOrLink{
@@ -15,6 +13,7 @@
     cursor: pointer;
     background-color:variables.$accent-color1;
     color: variables.$secondary-color;
+    @include baseText;
 
     padding: 0.5rem;
     &:hover{
@@ -25,6 +24,21 @@
     background-color: variables.$secondary-color;
     color: variables.$accent-color1;
     border: variables.$thin-border;
+}
+
+@mixin nav-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+@mixin nav{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    justify-items: center;
+    justify-content: center;
+    padding: 1.5rem;
 }
 
 @mixin flexColumn{

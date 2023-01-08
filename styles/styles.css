@@ -1,5 +1,10 @@
 body {
   background-color: rgb(198, 211, 236);
+  color: rgb(58, 9, 90);
+  font-size: 1rem;
+  font-family: "Courier New", Courier, monospace;
+  text-decoration: none;
+  text-align: center;
   font-size: 1rem;
   font-family: "Courier New", Courier, monospace;
 }
@@ -8,11 +13,14 @@ body a {
   font-family: "Courier New", Courier, monospace;
   text-decoration: none;
   text-align: center;
-  color: whitesmoke;
   border: none;
   cursor: pointer;
   background-color: rgb(58, 9, 90);
   color: aliceblue;
+  font-size: 1rem;
+  font-family: "Courier New", Courier, monospace;
+  text-decoration: none;
+  text-align: center;
   padding: 0.5rem;
 }
 body a:hover {
@@ -23,11 +31,14 @@ body button {
   font-family: "Courier New", Courier, monospace;
   text-decoration: none;
   text-align: center;
-  color: whitesmoke;
   border: none;
   cursor: pointer;
   background-color: rgb(58, 9, 90);
   color: aliceblue;
+  font-size: 1rem;
+  font-family: "Courier New", Courier, monospace;
+  text-decoration: none;
+  text-align: center;
   padding: 0.5rem;
 }
 body button:hover {
@@ -35,9 +46,11 @@ body button:hover {
 }
 body label {
   margin: 0;
+  white-space: nowrap;
 }
 body input {
   margin: 0;
+  padding: 0;
   background-color: aliceblue;
 }
 
@@ -45,7 +58,6 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 1rem;
 }
 header nav {
   display: flex;
@@ -53,6 +65,71 @@ header nav {
   gap: 1rem;
   justify-items: center;
   justify-content: center;
+  padding: 1.5rem;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  padding: 1rem;
+  justify-content: center;
+}
+.form-container #preferences-form {
+  background-color: aliceblue;
+  color: rgb(58, 9, 90);
+  border: 1px solid rgb(58, 9, 90);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin: 1rem;
+  padding: 1.5rem;
+  box-sizing: border-box;
+}
+.form-container #preferences-form h5 {
+  margin: 0;
+  padding: 0 0 0.5rem 0;
+  font-size: 1.2rem;
+}
+.form-container #preferences-form div {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+.form-container #preferences-form label {
+  box-sizing: border-box;
+  text-align: end;
+}
+.form-container #preferences-form input {
+  width: 3ex;
+  border-width: 1px;
+  border-color: rgb(124, 119, 119);
+  border-style: none none solid none;
+  text-align: center;
+}
+.form-container #preferences-form input[type=submit] {
+  margin-top: 0.5rem;
+  border: none;
+  cursor: pointer;
+  background-color: rgb(58, 9, 90);
+  color: aliceblue;
+  font-size: 1rem;
+  font-family: "Courier New", Courier, monospace;
+  text-decoration: none;
+  text-align: center;
+  padding: 0.5rem;
+  width: 50%;
+}
+.form-container #preferences-form input[type=submit]:hover {
+  background-color: rgb(118, 56, 141);
 }
 
 @media print {
@@ -131,7 +208,6 @@ aside {
   margin: auto;
   padding-top: 1rem;
   padding-bottom: 1rem;
-  overflow-x: scroll;
 }
 #chart .partial {
   display: flex;
@@ -172,6 +248,15 @@ aside {
   height: 1rem;
   width: 1rem;
   margin: 0% 0% 0% 0%;
+}
+
+#options-container {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  justify-items: center;
+  justify-content: center;
+  padding: 1.5rem;
 }
 
 #info .yarn-list-container {
