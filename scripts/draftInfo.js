@@ -85,7 +85,7 @@ function addInfo() {//Adds buttons for adding optional info to the draft
     projectButton.addEventListener('click', () => displayDraftInfo());
     place.appendChild(projectButton);
     place.appendChild(yarnButton)
-   // addInputCalculations();
+    addInputCalculations();
 
 
 }

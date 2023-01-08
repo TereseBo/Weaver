@@ -9,17 +9,18 @@ function calculateWarpEpi(ends, width){
     if(isZero(ends) || isZero(width)) {
         return 0;
     }
- return ends / width;
+ return Math.round(ends / width);
 }
 function calculateWarpEnds(epc, width){
     if(isZero(epc) || isZero(width)) {
         return 0;
     }
-    return epc * width;
+    return Math.round(epc * width);
 }
 
+
 function isZero(number) {
-    return number === 0;
+    return number == 0;
 }
 
 export { calculateWeaveWidth, calculateWarpEpi, calculateWarpEnds };

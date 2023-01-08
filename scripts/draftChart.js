@@ -43,9 +43,7 @@ function draftSetUp() {//Checks if user has set thredle/shaft preferences, if no
     let shaftPreference;
     let thredlePreference;
     (localStorage.getItem('shaftInput')) ? shaftPreference = localStorage.getItem('shaftInput') : shaftPreference = 4;
-    console.log(shaftPreference);
     (localStorage.getItem('thredleInput')) ? thredlePreference = localStorage.getItem('thredleInput') : thredlePreference = 4;
-    console.log(thredlePreference);
     let gridSizeX = 50;
     let gridSizeY = 50;
     createGrid(gridSizeX, gridSizeY, "draft"); //TODO: add possibility to choose gridsize for draft
