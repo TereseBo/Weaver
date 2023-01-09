@@ -30,14 +30,15 @@ function createYarnList(arr, thread) {//creates a list of yarns for the warp or 
     let yarnList = document.createElement('div');
     yarnList.id = `${thread}-list`;
     yarnList.classList.add('yarn-list');
-    yarnList.appendChild(document.createElement('h3')).textContent = `${thread.charAt(0).toUpperCase() + thread.slice(1)}`;
+    let yarnListHeader=document.createElement('h3');
+    yarnListHeader.classList.add("form-header")
+    yarnList.appendChild(yarnListHeader).textContent = `${thread.charAt(0).toUpperCase() + thread.slice(1)}`;
     document.getElementById('click-draft-yarn-list-container').appendChild(yarnList);
     arr.forEach(element => {
         let yarnContainer = document.createElement('form');
         let yarnColor = document.createElement('div');
         let yarnFiber = document.createElement('input');
         let yarnWeight = document.createElement('input');
-
 
         yarnContainer.classList.add('yarn-container');
         yarnColor.classList.add('yarn-color');
