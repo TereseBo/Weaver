@@ -5,7 +5,7 @@ function calculateWeaveWidth(ends, epc ){
 
     return ends / epc;
 }
-function calculateWarpEpi(ends, width){
+function calculateWarpEpc(ends, width){
     if(isZero(ends) || isZero(width)) {
         return 0;
     }
@@ -17,10 +17,11 @@ function calculateWarpEnds(epc, width){
     }
     return Math.round(epc * width);
 }
-
-
+function calculateEpcFromReed(dents, cm, threads){
+    return Math.round((dents/cm)*threads);
+}
 function isZero(number) {
     return number == 0;
 }
 
-export { calculateWeaveWidth, calculateWarpEpi, calculateWarpEnds };
+export { calculateWeaveWidth, calculateWarpEpc, calculateWarpEnds, calculateEpcFromReed };
