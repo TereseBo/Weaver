@@ -1,5 +1,7 @@
-import { draftSetUp } from "./draftChart.js";
-import { addInfo } from "./draftInfo.js";
+import { draftSetUp } from "./dchart.js";
+import { addInfo } from "./dinfo.js";
+
+
 
 document.addEventListener("DOMContentLoaded", function () {//Runs after page-load
     draftSetUp();

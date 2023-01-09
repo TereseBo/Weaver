@@ -8,31 +8,66 @@ function removeMenu() {
         menu.removeChild(menu.lastChild);
     }
 }
+function emptyContent() {
+    let content = document.getElementById('content');
+    while (content.firstChild) {
+        content.removeChild(content.lastChild);
+    }
+}
 function createForm() {//Creates form for user to input preferences
     let form = document.createElement("form");
+    let formBox= document.createElement("div");
+    formBox.setAttribute("class", "form-container");
+    form.setAttribute("id", "preferences-form");
     form.setAttribute("method", "post");
     let el = document.getElementById('content');
-    el.appendChild(form);
+    formBox.append(form);
+    el.appendChild(formBox);
+
+    // Create header
+    let h = document.createElement("h3");
+    h.innerHTML = "Loom information";
+    h.classList.add('form-header')
+    form.append(h);
    
-    // Create an input elements for 
+    // Create input, labels and container
     let shaftInput = document.createElement("input");
+    let shaftLabel = document.createElement("label");
+    let thredleInput = document.createElement("input");
+    let thredleLabel = document.createElement("label");
+    let shaftBox= document.createElement("div");
+    let thredleBox = document.createElement("div");
+
     shaftInput.setAttribute("type", "number");
     shaftInput.setAttribute("name", "shafts");
     shaftInput.setAttribute("id", "shafts");
-    shaftInput.setAttribute("placeholder", " Number of shafts");
+    shaftInput.setAttribute("placeholder", " 4");
+    shaftInput.setAttribute("size", "3");
 
-    let thredleInput = document.createElement("input");
+    shaftLabel.setAttribute("for", "shafts");
+    shaftLabel.innerHTML = "Number of shafts";
+
+    shaftBox.append(shaftLabel);
+    shaftBox.append(shaftInput);
+
+
     thredleInput.setAttribute("type", "number");
     thredleInput.setAttribute("name", "thredles");
     thredleInput.setAttribute("id", "thredles");
-    thredleInput.setAttribute("placeholder", " Number of thredles");
+    thredleInput.setAttribute("placeholder", " 4");
+
+    thredleLabel.setAttribute("for", "thredles");
+    thredleLabel.innerHTML = "Number of thredles";
+
+    thredleBox.append(thredleLabel);
+    thredleBox.append(thredleInput);
 
     // Create a submit button
     let s = document.createElement("input");
     s.setAttribute("type", "submit");
     s.setAttribute("value", "Submit");
-    form.append(shaftInput);
-    form.append(thredleInput);
+    form.append(shaftBox);
+    form.append(thredleBox);
     form.append(s);
 
     form.addEventListener('submit', event => {
@@ -52,13 +87,12 @@ function setUserPreferences() {
     
 }
 function collectUserPreferences() {
-    removeMenu();
+    emptyContent();
     createForm();
 
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-    console.log("DOM fully loaded and parsed");
     document.getElementById('preferences').addEventListener('click', collectUserPreferences);
     
 

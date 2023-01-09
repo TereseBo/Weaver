@@ -7,27 +7,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles/styles.css">
 
-    <script src="/scripts/draftPage.js" type="module"></script>
+    <script type="module" src="./scripts/dpage.js"></script>
+
+
     <title>Draft!</title>
 </head>
 
 <body>
 <header>
         <nav id="menu">
-        <button id="preferences">
-            Register preferences
-        </button>
-        <button onClick="window.location.href='draft.html'">
-            Create draft
-        </button>
-        <a href="draft.html">
-            Create Draft
-        <a href="calculator.html">
-            Calculator
-        </a>
-        <button onClick="window.location.href='calculator.html'">
-            Calculator
-        </button>
+<a href="./index.html">Home</a>
+
+
     
     </nav>
     </header>
@@ -35,7 +26,9 @@
         <form id="colorpick-form">
             <div class="form-content-container">
                 <div id="colorpick-text">
-                    <p> Pick a color and click <br> to add warp/weft/tie-up</p>
+                    <p> Pick a color and click <br> to add warp/weft/tie-up. <br>
+                        
+                    </p>
                 </div>
                 <div id="colorpick-box">
                     <label for="currentcolor">Current Color</label>
@@ -49,18 +42,21 @@
     </aside>
 
     <div id="content">
-        <div id="chart">
-        </div>
-        <div id="info">
+        <section id="chart">
+        </section>
+        <options id="options-container">
+        </options>
+        <section id="info">
 
             <div class="info-form-container" id="project-info-container">
                 <form class="info-form">
+                    <h3 class="form-header" >Details</h3>
                     <div class="info-container">
                         <h3 class="info-post-header">Reed:</h3>
                         <div class="info-post">
                         <input type="number" id="heddle-dents" name="heddle" min="1" max="100" value="50" >
                         /
-                        <input type="number" id="heddle-" name="heddle" min="1" max="100" value="10">
+                        <input type="number" id="heddle-spec" name="heddle" min="1" max="100" value="10"> cm
                     </div>
                     </div>
                     <div class="info-container">
@@ -103,7 +99,7 @@
 
             </div>
 
-        </div>
+        </section>
     </div>
 
 

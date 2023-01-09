@@ -3,23 +3,28 @@ function calculateWeaveWidth(ends, epc ){
         return 0;
     }
 
-    return ends / epc;
+    return roundToTwoDec(ends / epc);
 }
-function calculateWarpEpi(ends, width){
+function calculateWarpEpc(ends, width){
     if(isZero(ends) || isZero(width)) {
         return 0;
     }
- return ends / width;
+ return Math.round(ends / width);
 }
 function calculateWarpEnds(epc, width){
     if(isZero(epc) || isZero(width)) {
         return 0;
     }
-    return epc * width;
+    return Math.round(epc * width);
 }
-
+function calculateEpcFromReed(dents, cm, threads){
+    return Math.round((dents/cm)*threads);
+}
 function isZero(number) {
-    return number === 0;
+    return number == 0;
+}
+function roundToTwoDec(nr){
+    return Math.round(nr*100)/100;
 }
 
-export { calculateWeaveWidth, calculateWarpEpi, calculateWarpEnds };
+export { calculateWeaveWidth, calculateWarpEpc, calculateWarpEnds, calculateEpcFromReed };

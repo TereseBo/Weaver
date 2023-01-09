@@ -3,7 +3,8 @@
 
 body {
     background-color: variables.$base-color;
-
+    color: variables.$accent-color1;
+    @include mixins.baseText;
 
     a {
         @include mixins.baseText;
@@ -13,37 +14,87 @@ body {
     button {
         @include mixins.baseText;
         @include mixins.buttonOrLink;
-
     }
 
     label {
         margin: 0;
+        white-space: nowrap;
     }
 
     input {
-        margin: 0;
+        margin: 0 0.2rem 0 0.2rem;
+        padding: 0.2rem 0.2rem 0 0.2rem ;
         background-color: variables.$secondary-color;
+        @include mixins.underline-input;
+        &:focus{
+            outline: none;
+            background-color: variables.$base-color;
+            border-radius: 1.5px 1.5px 0 0;
+        }
     }
 
-    font-size: 1rem;
-    font-family: 'Courier New',
-    Courier,
-    monospace;
-
+    .form-header{
+        @include mixins.form-header;
+    }
 }
 
 header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 1rem;
+@include mixins.nav-container;
 
     nav {
-        display: flex;
-        flex-direction: row;
-        gap: 1rem;
-        justify-items: center;
-        justify-content: center;
+        @include mixins.nav;
+    }
+}
+
+//index.html
+.form-container {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    padding: 1rem;
+    justify-content: center;
+
+    #preferences-form {
+        @include mixins.text-area;
+        @include mixins.flexColumn;
+        padding: 1.5rem;
+        box-sizing: border-box;
+
+        h5{
+            margin: 0;
+            padding: 0 0 0.5rem 0;
+            font-size: 1.2rem;
+        }
+
+        div{
+            width: 100%;
+            box-sizing: border-box;
+            @include mixins.flexRow;
+            align-items: flex-end;
+            justify-content: flex-end;
+        }
+
+        label {
+            box-sizing: border-box;
+            text-align: end;
+            
+        }
+        input{
+            width: 3ex;
+            border-width: 1px;
+            border-color: rgb(124, 119, 119);
+            border-style: none none solid none;
+            text-align: center;
+
+            &[type=submit]{
+                margin-top: 0.5rem;
+                @include mixins.buttonOrLink;
+                width: 50%;
+            }
+        }
+
+        
+
     }
 }
 
@@ -51,6 +102,9 @@ header {
 
 //Draft 
 @media print {
+    body{
+        background-color: transparent;
+    }
 
     header {
         display: none;
@@ -59,6 +113,16 @@ header {
     aside {
         display: none;
     }
+
+    #options-container{
+        display: none !important;
+        padding:0;
+    }
+
+    .info-form, .yarn-list{
+        background-color: transparent !important;
+    }
+
 
     .cell {
         height: 0.5rem;
@@ -125,6 +189,7 @@ aside {
                 width: 100%;
                 margin: 0;
                 box-sizing: border-box;
+                font-weight: 600;
             }
         }
     }
@@ -139,7 +204,6 @@ aside {
     margin: auto;
     padding-top: 1rem;
     padding-bottom: 1rem;
-    overflow-x: scroll;
 
     .partial {
         display: flex;
@@ -187,6 +251,9 @@ aside {
         }
     }
 }
+#options-container{
+    @include mixins.nav;
+}
 
 #info {
     .yarn-list-container {
@@ -216,14 +283,6 @@ aside {
                     width: 1.5rem;
                     height: 1.5rem;
                     border: variables.$thin-border;
-
-                }
-
-                input {
-                    margin: 0;
-                    border-width: 1px;
-                    border-color: rgb(124, 119, 119);
-                    border-style: none none solid none;
                 }
             }
         }
@@ -232,23 +291,23 @@ aside {
     .info-form-container {
 
         display: none;
-        // display: flex;
         flex-direction: row;
         gap: 1rem;
         justify-content: center;
         padding: 1rem;
         box-sizing: border-box;
+      
 
         .info-form {
             @include mixins.text-area;
+            @include mixins.flexColumn;
 
-            display: flex;
-            flex-direction: column;
             gap: 0.5rem;
-            align-items: flex-start;
             border: variables.$thin-border;
-            padding: 1rem 1rem 1rem 1rem;
+            padding: 1rem;
             box-sizing: border-box;
+
+
 
 
             .info-container {
@@ -261,10 +320,8 @@ aside {
                 padding: 0 0.5rem 0 0;
                 box-sizing: border-box;
 
-
                 .info-post-header {
                     min-width: 110px;
-                    // padding: 0 0 0 0;
                     margin: 0;
                     text-align: end;
                     box-sizing: border-box;
@@ -281,18 +338,8 @@ aside {
                 input {
                     display: inline;
                     width: 3ex;
-                    margin: 0 0.25rem 0 0.25rem;
-                    border-width: 1px;
-                    border-color: rgb(124, 119, 119);
-                    border-style: none none solid none;
                     text-align: center;
                 }
-
-                label {
-                    margin: 0;
-                }
-
-
             }
 
         }
@@ -312,7 +359,6 @@ aside {
         background-color: aquamarine;
         margin: auto;
         padding: 1rem;
-
 
         .data {
             display: flex;
@@ -344,11 +390,11 @@ aside {
 
             h6 {
                 margin: 0;
-                padding-top:1rem;
+                padding-top: 1rem;
             }
 
             &:last-child {
-                border-bottom-style: solid ;
+                border-bottom-style: solid;
             }
 
             .data {
