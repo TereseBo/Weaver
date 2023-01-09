@@ -1,3 +1,5 @@
+import {isZeroish} from './calc.js';
+
 function addItemToWarp(itemNr){
     const itemBox = document.getElementById("item-box");
     let clone = itemBox.cloneNode(true);
@@ -7,7 +9,11 @@ function addItemToWarp(itemNr){
     document.getElementById("items-container").appendChild(clone);
 }
 function removeItemFromWarp(itemNr){
-
+    let item=document.getElementById(`item-${itemNr}`)
+    while(item.firstChild){
+        item.firstChild.remove()
+    }
+    item.remove()
 }
 
 function addElements(start, nrOfItems, callback){
@@ -16,7 +22,12 @@ function addElements(start, nrOfItems, callback){
     }
 }
 function removeElements(stop, nrOfItems, callback){
-
+    if(isZeroish(stop)){
+        stop=0;
+    }
+    for(let i=nrOfItems-1; i>stop;i--){
+        callback(i)
+    }
 }
 
 function countChildren(id){
@@ -29,7 +40,9 @@ function addEventListenersWarpLength(){
     console.log("change")
     document.getElementById("items").addEventListener("input", (e)=>{
         let visibleItems = countChildren('items-container');
-        visibleItems<e.target.value ? addElements(visibleItems, e.target.value, addItemToWarp) : console.log("no items added");
+        
+        visibleItems<e.target.value ? addElements(visibleItems, e.target.value, addItemToWarp) :removeElements(e.target.value, visibleItems, removeItemFromWarp)
+            ;
         
     });
 }
