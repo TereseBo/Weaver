@@ -1,4 +1,4 @@
-import { isActive } from './draftchart.js';
+import { isActive } from './dchart.js';
 import { calculateWarpEnds, calculateWarpEpi, calculateWeaveWidth } from './calc.js';
 function getWarpColors() {//returns a set of warp colors used in the draft
     let warpColors = [];

@@ -1,5 +1,5 @@
-import { draftSetUp } from "./draftchart.js";
-import { addInfo } from "./draftinfo.js";
+import { draftSetUp } from "./dchart.js";
+import { addInfo } from "./dinfo.js";
 
 
 
