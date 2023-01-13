@@ -73,6 +73,9 @@ function generateYarnLists() {//generates the warp and weft yarn lists
 
     createYarnList(getWarpColors(), 'warp');
     createYarnList(getWeftColors(), 'weft');
+    if(document.getElementById('warp-list')||document.getElementById('weft-list')){
+        document.getElementById('click-draft-yarn-list-container').style.pageBreakAfter="always";
+    }
 }
 function addInfo() {//Adds buttons for adding optional info to the draft
     let place = document.getElementById('options-container');
