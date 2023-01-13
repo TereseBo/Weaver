@@ -23,23 +23,36 @@ body {
 
     input {
         margin: 0 0.2rem 0 0.2rem;
-        padding: 0.2rem 0.2rem 0 0.2rem ;
+        padding: 0.2rem 0.2rem 0 0.2rem;
         background-color: variables.$secondary-color;
         @include mixins.underline-input;
-        &:focus{
+
+        &:focus {
             outline: none;
             background-color: variables.$base-color;
             border-radius: 1.5px 1.5px 0 0;
         }
+            /*Spinbutton removal Chrome*/
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Spinbutton removal Firefox */
+        &[type=number] {
+            -moz-appearance: textfield;
+            appearance: textfield;
+        }
     }
 
-    .form-header{
+    .form-header {
         @include mixins.form-header;
     }
 }
 
 header {
-@include mixins.nav-container;
+    @include mixins.nav-container;
 
     nav {
         @include mixins.nav;
@@ -60,13 +73,13 @@ header {
         padding: 1.5rem;
         box-sizing: border-box;
 
-        h5{
+        h5 {
             margin: 0;
             padding: 0 0 0.5rem 0;
             font-size: 1.2rem;
         }
 
-        div{
+        div {
             width: 100%;
             box-sizing: border-box;
             @include mixins.flexRow;
@@ -77,23 +90,24 @@ header {
         label {
             box-sizing: border-box;
             text-align: end;
-            
+
         }
-        input{
+
+        input {
             width: 3ex;
             border-width: 1px;
             border-color: rgb(124, 119, 119);
             border-style: none none solid none;
             text-align: center;
 
-            &[type=submit]{
+            &[type=submit] {
                 margin-top: 0.5rem;
                 @include mixins.buttonOrLink;
                 width: 50%;
             }
         }
 
-        
+
 
     }
 }
@@ -102,7 +116,7 @@ header {
 
 //Draft 
 @media print {
-    body{
+    body {
         background-color: transparent;
     }
 
@@ -114,12 +128,13 @@ header {
         display: none;
     }
 
-    #options-container{
+    #options-container {
         display: none !important;
-        padding:0;
+        padding: 0;
     }
 
-    .info-form, .yarn-list{
+    .info-form,
+    .yarn-list {
         background-color: transparent !important;
     }
 
@@ -251,7 +266,8 @@ aside {
         }
     }
 }
-#options-container{
+
+#options-container {
     @include mixins.nav;
 }
 
@@ -260,14 +276,14 @@ aside {
         display: flex;
         flex-direction: row;
         gap: 1rem;
-        padding: 1rem;
+        //padding: 1rem;
         align-items: flex-start;
         justify-content: center;
 
         .yarn-list {
             @include mixins.flexColumn;
             @include mixins.text-area;
-            padding: 1rem;
+            padding: 1rem 1rem 1.5rem 1rem;
 
             h3 {
                 margin: 0;
@@ -296,7 +312,7 @@ aside {
         justify-content: center;
         padding: 1rem;
         box-sizing: border-box;
-      
+
 
         .info-form {
             @include mixins.text-area;

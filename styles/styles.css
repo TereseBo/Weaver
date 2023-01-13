@@ -55,11 +55,21 @@ body input {
   border-width: 1px;
   border-color: rgb(124, 119, 119);
   border-style: none none solid none;
+  /*Spinbutton removal Chrome*/
+  /* Spinbutton removal Firefox */
 }
 body input:focus {
   outline: none;
   background-color: rgb(198, 211, 236);
   border-radius: 1.5px 1.5px 0 0;
+}
+body input::-webkit-outer-spin-button, body input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+body input[type=number] {
+  -moz-appearance: textfield;
+  appearance: textfield;
 }
 body .form-header {
   margin: 0;
@@ -163,7 +173,8 @@ header nav {
     display: none !important;
     padding: 0;
   }
-  .info-form, .yarn-list {
+  .info-form,
+  .yarn-list {
     background-color: transparent !important;
   }
   .cell {
@@ -291,7 +302,6 @@ aside {
   display: flex;
   flex-direction: row;
   gap: 1rem;
-  padding: 1rem;
   align-items: flex-start;
   justify-content: center;
 }
@@ -304,7 +314,7 @@ aside {
   background-color: aliceblue;
   color: rgb(58, 9, 90);
   border: 1px solid rgb(58, 9, 90);
-  padding: 1rem;
+  padding: 1rem 1rem 1.5rem 1rem;
 }
 #info .yarn-list-container .yarn-list h3 {
   margin: 0;

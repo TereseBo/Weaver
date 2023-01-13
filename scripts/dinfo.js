@@ -58,9 +58,11 @@ function createYarnList(arr, thread) {//creates a list of yarns for the warp or 
 
             yarnList.appendChild(yarnContainer);
         });
+        window.scrollTo(0, document.body.scrollHeight);
     }
 }
 function generateYarnLists() {//generates the warp and weft yarn lists
+    //TODO:Adjust Yarnlist con tainer to not have space when empty
     if (!document.getElementById('click-draft-yarn-list-container')) {
         let info = document.getElementById('info');
         let yarnListContainer = document.createElement('div');
@@ -89,6 +91,7 @@ function addInfo() {//Adds buttons for adding optional info to the draft
 function displayDraftInfo() {//Displays the project info form
 
     document.getElementById('project-info-container').style.display = 'flex';
+     window.scrollTo(0, document.body.scrollHeight);
 
 }
 
