@@ -14,34 +14,65 @@
 </head>
 
 <body>
-<header>
+    <header>
         <nav id="menu">
-<a href="./index.html">Home</a>
-<a href="./calculator.html">Calculator</a>
+            <a href="./index.html">Home</a>
+            <a href="./calculator.html">Calculator</a>
 
 
 
-    
-    </nav>
+
+        </nav>
     </header>
-    <aside>
+    <top-bar>
         <form id="colorpick-form">
             <div class="form-content-container">
                 <div id="colorpick-text">
                     <p> Pick a color and click <br> to add warp/weft/tie-up. <br>
-                        
+
                     </p>
                 </div>
-                <div id="colorpick-box">
-                    <label for="currentcolor">Current Color</label>
-                    <input type="color" id="currentcolor" name="currentcolor" value="#000000">
+                <div>
+                    <!--
+                    <h3>Color</h3>
+                    -->
+                    <div class="color-container">
+                        <div class="colorpick-box" >
+                            <h3>Current <br> Color</h3>
+                            <label style="visibility:hidden">spacer</label>
+                            <div>
+                                <input type="color" id="currentcolor" name="currentcolor" value="#000000">
+                            </div>
+                        </div>
+                        <div class="colorpick-box" id="previous-colors-container" style="display: none;">
+
+                            <h3>Previous <br> Colors</h3>
+                            <div id="previous-colors">
+                                <div class="previous-color" id="warp-color-container" style="display: none;" >
+                                    <label>Warp</label>
+                                    <div class="thread-box" id="warp-box">
+                                    </div>
+                                </div>
+                                <div class="previous-color" id="weft-color-container" style="display: none;" >
+                                    <label>Weft</label>
+                                    <div class="thread-box" id="weft-box">
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+            </div>
+
 
             </div>
 
         </form>
 
-    </aside>
+    </top-bar>
+
 
     <div id="content">
         <section id="chart">
@@ -52,48 +83,50 @@
 
             <div class="info-form-container" id="project-info-container">
                 <form class="info-form">
-                    <h3 class="form-header" >Details</h3>
+                    <h3 class="form-header">Details</h3>
                     <div class="info-container">
                         <h3 class="info-post-header">Reed:</h3>
                         <div class="info-post">
-                        <input type="number" id="heddle-dents" name="heddle" min="1" max="100" value="50" >
-                        /
-                        <input type="number" id="heddle-spec" name="heddle" min="1" max="100" value="10"> cm
-                    </div>
+                            <input type="number" id="heddle-dents" name="heddle" min="1" max="100" value="50">
+                            /
+                            <input type="number" id="heddle-spec" name="heddle" min="1" max="100" value="10"> cm
+                        </div>
                     </div>
                     <div class="info-container">
                         <h3 class="info-post-header">Threding:</h3>
                         <div class="info-post">
-                        <input type="number" id="threads-heddle" name="tieup" min="1" max="10" value="1">
-                        
-                        <label for="threads-heddle">/heddle </label>
-                        <input type="number" id="threads-dent" name="tieup" min="1" max="10" value="2">
-                        <label for="threads-dent">/dent </label>
+                            <input type="number" id="threads-heddle" name="tieup" min="1" max="10" value="1">
+
+                            <label for="threads-heddle">/heddle </label>
+                            <input type="number" id="threads-dent" name="tieup" min="1" max="10" value="2">
+                            <label for="threads-dent">/dent </label>
                         </div>
                     </div>
                     <div class="info-container">
                         <h3 class="info-post-header">Ends/cm:</h3>
                         <div class="info-post">
-                        <label for="warp-sett">warp </label>
-                        <input type="number" id="warp-sett" name="warp-sett" min="1" max="100" value="10">
-                        <label for="weft-sett">weft </label>
-                        <input type="number" id="weft-sett" name="weft-sett" min="1" max="100" value="10"> 
+                            <label for="warp-sett">warp </label>
+                            <input type="number" id="warp-sett" name="warp-sett" min="1" max="100" value="10">
+                            <label for="weft-sett">weft </label>
+                            <input type="number" id="weft-sett" name="weft-sett" min="1" max="100" value="10">
                         </div>
                     </div>
                     <div class="info-container">
                         <h3 class="info-post-header">Ends total:</h3>
                         <div class="info-post">
 
-                        <label for="threads">threads </label>
-                        <input type="number" id="threads" name="threads" min="1" max="2000" value="750" style="width: 4ex"> 
+                            <label for="threads">threads </label>
+                            <input type="number" id="threads" name="threads" min="1" max="2000" value="750"
+                                style="width: 4ex">
                         </div>
                     </div>
                     <div class="info-container">
                         <h3 class="info-post-header">Weave width:</h3>
                         <div class="info-post">
-                      
-                        <input type="number" id="warp-width" name="warp" min="1" max="300" value="100" style="width: 5ex">
-                        <label for="warp-width">cm </label>
+
+                            <input type="number" id="warp-width" name="warp" min="1" max="300" value="100"
+                                style="width: 5ex">
+                            <label for="warp-width">cm </label>
                         </div>
                     </div>
                 </form>

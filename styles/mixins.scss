@@ -62,6 +62,11 @@
     margin: 1rem;
 }
 
+@mixin rounded{
+    border-radius: 2px;
+    border: variables.$base-color solid 1px;
+}
+
 @mixin flexRow{
     display: flex;
     flex-direction: row;

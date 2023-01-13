@@ -1,4 +1,5 @@
 //Functions in grid creation
+import { updateColorbox } from "./colorpick.js";
 function createGrid(x = 4, y = 4, id = "grid") {//Creates a grid with x columns and y rows, with the id of id and appends to id="chart"
     let grid = document.createElement('div');
     grid.setAttribute("id", `${id}-wrapper`);
@@ -99,12 +100,15 @@ function onClickfunctionPicker(grid, cell) {//Switch to determine which function
                 setBackgroundColor(this);
                 checkWarp(this);
                 calculateDraftfromShaft(this);
+                updateColorbox(getActiveColor(), 'warp');
             });
             break;
         case "thredles":
             cell.addEventListener("click", function () {
                 setBackgroundColor(this);
                 calculateDraftfromTredle(this);
+                updateColorbox(getActiveColor(), 'weft');
+
             });
             break;
         case "tie-up":

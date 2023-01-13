@@ -185,14 +185,41 @@ header nav {
     height: 0.5rem;
   }
 }
-aside {
+top-bar {
   position: sticky;
   top: 50px;
 }
 
+/*
+side-bar{
+    position: sticky;
+    top: 50vh;
+    display: flex;
+    flex-direction: column;
+    background-color: transparent;
+
+
+    #colortracker-container{
+        @include mixins.text-area;
+        margin-right: calc(10vw);
+        margin-left: auto;
+        padding: 1rem;
+        gap:1rem;
+        display: flex;
+        flex-direction: column;
+
+    }
+}*/
 #colorpick-form {
   display: flex;
   flex-direction: column;
+}
+#colorpick-form label {
+  font-size: 0.8rem;
+}
+#colorpick-form h3 {
+  margin: 0 0 0.2rem 0;
+  padding: 0;
 }
 #colorpick-form .form-content-container {
   border: 2px solid rgb(58, 9, 90);
@@ -204,39 +231,59 @@ aside {
   flex-direction: row;
   flex-wrap: nowrap;
   gap: 1rem;
-  justify-content: center;
-  align-content: center;
+  align-items: center;
   width: auto;
+  height: auto;
   margin: auto;
 }
-#colorpick-form .form-content-container #colorpick-text {
-  text-align: center;
+#colorpick-form .form-content-container .color-container {
+  display: flex;
+  flex-direction: row;
+  justify-items: center;
+  gap: 1rem;
 }
-#colorpick-form .form-content-container #colorpick-box {
+#colorpick-form .form-content-container .color-container .colorpick-box {
+  box-sizing: border-box;
+}
+#colorpick-form .form-content-container .color-container .colorpick-box label {
+  font-weight: 600;
+}
+#colorpick-form .form-content-container .color-container .colorpick-box input[type=color] {
+  width: 2.6rem;
+  height: 2rem;
+  padding: 0;
+  border: 0;
+  margin: -0.3rem;
+  box-sizing: border-box;
+  background-color: inherit;
+}
+#colorpick-form .form-content-container .color-container .colorpick-box #previous-colors {
+  display: flex;
+  gap: 1rem;
+}
+#colorpick-form .form-content-container .color-container .colorpick-box #previous-colors .previous-color {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  max-width: 3rem;
+}
+#colorpick-form .form-content-container .color-container .colorpick-box #previous-colors .previous-color .thread-box {
+  margin-top: 0.3rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   gap: 0.5rem;
-}
-#colorpick-form .form-content-container #colorpick-box input {
-  width: 100%;
+  padding-left: calc((100% - 2.5rem - 1px) / 2);
   box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-  border: 1px solid black;
-  border-radius: 0.5rem;
-  background-color: white;
-  color: black;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  text-decoration: none;
-  text-align: center;
 }
-#colorpick-form .form-content-container #colorpick-box label {
-  width: 100%;
-  margin: 0;
+#colorpick-form .form-content-container .color-container .colorpick-box #previous-colors .previous-color .thread-box :last-child {
+  justify-self: flex-start;
+}
+#colorpick-form .form-content-container .color-container .colorpick-box #previous-colors .previous-color .thread-box .thread {
+  width: 1rem;
+  height: 1rem;
+  border: rgb(122, 122, 122) solid 1px;
   box-sizing: border-box;
-  font-weight: 600;
 }
 
 #chart {
