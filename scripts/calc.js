@@ -1,19 +1,19 @@
 //Calculations relating to weave width
 function calculateWeaveWidth(ends, epc ){
-    if(isZero(ends) || isZeroish(epc)) {
+    if(isZeroish(ends) || isZeroish(epc)) {
         return 0;
     }
 
     return roundToTwoDec(ends / epc);
 }
 function calculateWarpEpc(ends, width){
-    if(isZero(ends) || isZeroish(width)) {
+    if(isZeroish(ends) || isZeroish(width)) {
         return 0;
     }
  return Math.round(ends / width);
 }
 function calculateWarpEnds(epc, width){
-    if(isZero(epc) || isZeroish(width)) {
+    if(isZeroish(epc) || isZeroish(width)) {
         return 0;
     }
     return Math.round(epc * width);
