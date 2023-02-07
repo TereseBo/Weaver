@@ -21,6 +21,10 @@ function calculateWarpEnds(epc, width){
 function calculateEpcFromReed(dents, cm, threads){
     return Math.round((dents/cm)*threads);
 }
+
+
+
+
 //Calculations relating to length
 function calculateItemsLength( items, shrink, weaveIin){
     console.log(items)
@@ -32,9 +36,6 @@ function calculateItemsLength( items, shrink, weaveIin){
 function warpLength(items, fixed){
 
 }
-
-
-
 function isZeroish(number) {
     return number == 0;
 }

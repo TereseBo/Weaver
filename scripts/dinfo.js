@@ -26,8 +26,8 @@ function checkForDuplicates(thread) {//checks for duplicates of info
 }
 function createYarnList(arr, thread) {//creates a list of yarns for the warp or weft
     checkForDuplicates(thread);
-    if (arr.size>0) {
-        
+    if (arr.size > 0) {
+
         let yarnList = document.createElement('div');
         yarnList.id = `${thread}-list`;
         yarnList.classList.add('yarn-list');
@@ -59,7 +59,7 @@ function createYarnList(arr, thread) {//creates a list of yarns for the warp or 
             yarnList.appendChild(yarnContainer);
         });
         window.scrollTo(0, document.body.scrollHeight);
-    } else{ /* //TODO: Consider if message should be displayd when yarns are not set
+    } else { /* //TODO: Consider if message should be displayd when yarns are not set
         let yarnList = document.createElement('div');
         yarnList.id = `${thread}-list`;
         yarnList.classList.add('yarn-list');
@@ -72,7 +72,7 @@ function createYarnList(arr, thread) {//creates a list of yarns for the warp or 
         let msg='Not selected'
         yarnList.appendChild(yarnmessagebox).textContent=msg;
         window.scrollTo(0, document.body.scrollHeight); */
-    } 
+    }
 }
 function generateYarnLists() {//generates the warp and weft yarn lists
     //TODO:Adjust Yarnlist con tainer to not have space when empty
@@ -86,8 +86,8 @@ function generateYarnLists() {//generates the warp and weft yarn lists
 
     createYarnList(getWarpColors(), 'warp');
     createYarnList(getWeftColors(), 'weft');
-    if(document.getElementById('warp-list')||document.getElementById('weft-list')){
-        document.getElementById('click-draft-yarn-list-container').style.pageBreakAfter="always";
+    if (document.getElementById('warp-list') || document.getElementById('weft-list')) {
+        document.getElementById('click-draft-yarn-list-container').style.pageBreakAfter = "always";
     }
 }
 function addInfo() {//Adds buttons for adding optional info to the draft
@@ -107,7 +107,7 @@ function addInfo() {//Adds buttons for adding optional info to the draft
 function displayDraftInfo() {//Displays the project info form
 
     document.getElementById('project-info-container').style.display = 'flex';
-     window.scrollTo(0, document.body.scrollHeight);
+    window.scrollTo(0, document.body.scrollHeight);
 
 }
 
@@ -118,16 +118,36 @@ function addInputCalculations() {//Adds calculations to the input fields
     let reedDents = document.getElementById('heddle-dents')
     let reedSpec = document.getElementById('heddle-spec')
     let reedSett = document.getElementById('threads-dent')
+    let reedelement = [reedDents, reedSpec]
     warpEpcInput.addEventListener('input', () => {
         let warpEpc = warpEpcInput.value;
         let warpEnds = warpEndsInput.value;
         let warpWidth = warpWidthInput.value;
+        let reedFactor = (reedDents.value / reedSpec.value)
+
         if (warpEnds) {
             warpWidthInput.value = calculateWeaveWidth(warpEnds, warpEpc);
         }
         else if (warpWidth) {
             warpEndsInput.value = calculateWarpEnds(warpEpc, warpWidth);
 
+        }
+        console.log(checkInputMatch(warpEpc, reedFactor))
+        if (checkInputMatch(warpEpc, reedFactor)) { //TODO: clean this mess up and add corresponding class in styles
+            reedelement.forEach(element => {
+
+                element.classList.remove('red')
+            })
+        } else {
+            reedelement.forEach(element => {
+                element.classList.add('red')
+
+            })
+        }
+        if (checkInputMatch(warpEpc, reedSett.value)) {
+            reedSett.classList.remove('red')
+        } else {
+            reedSett.classList.add('red')
         }
     });
     warpEndsInput.addEventListener('input', () => {
@@ -173,10 +193,24 @@ function addInputCalculations() {//Adds calculations to the input fields
             warpEpcInput.dispatchEvent(new Event('input', { bubbles: true, cancelable: true }))
         }
 
+
     })
 
 
 
+}
+function checkInputMatch(val1, val2) {//Checks if values are compatible
+
+    let res = true
+    console.log(val1)
+    console.log(val2)
+    console.log(val1 % val2)
+    if (val1 % val2 == 0 || val2 % val1 == 0) {
+        res = true
+    } else {
+        res = false
+    }
+    return res
 }
 
 
