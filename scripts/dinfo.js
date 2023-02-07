@@ -59,7 +59,20 @@ function createYarnList(arr, thread) {//creates a list of yarns for the warp or 
             yarnList.appendChild(yarnContainer);
         });
         window.scrollTo(0, document.body.scrollHeight);
-    }
+    } else{ /* //TODO: Consider if message should be displayd when yarns are not set
+        let yarnList = document.createElement('div');
+        yarnList.id = `${thread}-list`;
+        yarnList.classList.add('yarn-list');
+        let yarnListHeader = document.createElement('h3');
+        yarnListHeader.classList.add("form-header")
+        yarnList.appendChild(yarnListHeader).textContent = `${thread.charAt(0).toUpperCase() + thread.slice(1)}`;
+        document.getElementById('click-draft-yarn-list-container').appendChild(yarnList);
+
+        let yarnmessagebox=document.createElement('div')
+        let msg='Not selected'
+        yarnList.appendChild(yarnmessagebox).textContent=msg;
+        window.scrollTo(0, document.body.scrollHeight); */
+    } 
 }
 function generateYarnLists() {//generates the warp and weft yarn lists
     //TODO:Adjust Yarnlist con tainer to not have space when empty
