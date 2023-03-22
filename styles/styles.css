@@ -460,7 +460,7 @@ side-bar{
   white-space: nowrap;
 }
 #calculator .info-form .data input {
-  margin: 0 0.5rem 0 0;
+  margin: 0 0.2rem 0 0.5rem;
   padding: 0;
   text-align: center;
 }
