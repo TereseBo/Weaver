@@ -128,10 +128,11 @@ header {
         display: none;
     }
 
-    #options-container {
+    #options-container, #colorpick-form {
         display: none !important;
         padding: 0;
     }
+    
 
     .info-form,
     .yarn-list {

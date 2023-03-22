@@ -169,7 +169,7 @@ header nav {
   aside {
     display: none;
   }
-  #options-container {
+  #options-container, #colorpick-form {
     display: none !important;
     padding: 0;
   }

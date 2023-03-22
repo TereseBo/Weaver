@@ -50,7 +50,7 @@ function createYarnList(arr, thread) {//creates a list of yarns for the warp or 
             yarnFiber.type = 'text';
             yarnFiber.placeholder = 'Yarn fiber';
 
-            yarnWeight.type = 'number';
+            yarnWeight.type = 'text';
             yarnWeight.placeholder = 'Yarn weight';
             yarnContainer.appendChild(yarnColor);
             yarnContainer.appendChild(yarnFiber);
@@ -62,7 +62,6 @@ function createYarnList(arr, thread) {//creates a list of yarns for the warp or 
     }
 }
 function generateYarnLists() {//generates the warp and weft yarn lists
-    //TODO:Adjust Yarnlist con tainer to not have space when empty
     if (!document.getElementById('click-draft-yarn-list-container')) {
         let info = document.getElementById('info');
         let yarnListContainer = document.createElement('div');
