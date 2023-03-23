@@ -448,8 +448,9 @@ side-bar{
     display: flex;
 
     .info-form {
+        @include mixins.text-area;
         @include mixins.flexColumn;
-        background-color: aquamarine;
+       // background-color: aquamarine;
         margin: auto;
         padding: 1rem;
 
@@ -457,10 +458,9 @@ side-bar{
             display: flex;
             width: 100%;
 
-            label {
+            label:first-of-type {
                 margin: 0;
                 padding: 0;
-                width: 50%;
                 min-width: 100px;
                 text-align: end;
                 margin-right: 1rem;
