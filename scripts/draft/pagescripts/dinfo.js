@@ -1,5 +1,6 @@
 import { isActive } from './dchart.js';
-import { calculateWarpEnds, calculateWarpEpc, calculateWeaveWidth, calculateEpcFromReed } from './calc.js';
+import { calculateWarpEnds, calculateWarpEpc, calculateWeaveWidth, calculateEpcFromReed } from '../../calculator/calc.js';
+
 function getWarpColors() {//returns a set of warp colors used in the draft
     let warpColors = [];
     let warpCells = Array.from(document.querySelectorAll('[data-grid=shafts]')).filter(isActive);
@@ -110,7 +111,7 @@ function displayDraftInfo() {//Displays the project info form
 
 }
 
-function addInputCalculations() {//Adds calculations to the input fields
+function addInputCalculations() {//Adds calculations to the input fields it's very unclear why I didn't do one function for the form instead
     let warpEpcInput = document.getElementById('warp-sett');
     let warpEndsInput = document.getElementById('threads');
     let warpWidthInput = document.getElementById('warp-width');
