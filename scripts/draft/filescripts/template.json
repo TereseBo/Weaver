@@ -8,17 +8,23 @@
             "pattern_repeat": "nr"
         },
         "colors":{
+            "pattern":[{}],
             "comment":"specified as 'rgb(0,0,0)':'nr of threads'"
         }
     },
     "treadling": {
         "count": "nr",
-        "pattern": [],
+        "pattern": [[]],
         "pattern_repeat": "nr",
         "selvage":{
             "pattern": "nr",
             "pattern_repeat": "nr"
+        },
+        "colors":{
+            "pattern":[{}],
+            "comment":"specified as 'rgb(0,0,0)':'nr of threads'"
         }
+
     },
     "tieup": {
         
