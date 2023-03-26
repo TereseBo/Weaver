@@ -9,14 +9,24 @@ function removeGrid() {//Not tested
 }
 
 function importcolors(object){
-    let shafts=document.getElementById('shafts')
+    let shafts=document.querySelectorAll(`[data-grid="${grid}"]`);
+    
+    let columnTracker=0;
     object.shafts.pattern.forEach(element, index => {
-        shafts.getElementById(element)
+        let color=element.color;
+        let threads=element.threads;
+        for (let i = 0; i < threads; i++) {
+           let y= object.shafts.pattern[i]
+              let threadElement=shafts.find(id=`shafts-${y}-${columnTracker}`)
+            threadElement.style.backgroundColor=color;
+            columnTracker++;
+        }
 
     });
 }
 
 function createDraftFromObject(object) {
+    removeGrid();
     draftSetUp(object.shafts.count, object.threadling.count);
 }
 

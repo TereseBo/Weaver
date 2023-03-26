@@ -7,10 +7,9 @@
             "pattern": "nr",
             "pattern_repeat": "nr"
         },
-        "colors":{
-            "pattern":[{}],
-            "comment":"specified as 'rgb(0,0,0)':'nr of threads'"
-        }
+        "colors":[
+            {"comment":"specified as {'color':'rgb(0,0,0)','threads':'nr'}"}
+        ]
     },
     "treadling": {
         "count": "nr",
@@ -20,10 +19,9 @@
             "pattern": "nr",
             "pattern_repeat": "nr"
         },
-        "colors":{
-            "pattern":[{}],
-            "comment":"specified as 'rgb(0,0,0)':'nr of threads'"
-        }
+        "colors":[
+            {"comment":"specified as {'color':'rgb(0,0,0)','threads':'nr'}"}
+        ]
 
     },
     "tieup": {
