@@ -1,5 +1,6 @@
 import { isActive } from './dchart.js';
 import { calculateWarpEnds, calculateWarpEpc, calculateWeaveWidth, calculateEpcFromReed } from '../../calculator/calc.js';
+import { saveDraft } from '../filescripts/create.js';
 
 function getWarpColors() {//returns a set of warp colors used in the draft
     let warpColors = [];
@@ -87,19 +88,23 @@ function generateYarnLists() {//generates the warp and weft yarn lists
     createYarnList(getWarpColors(), 'warp');
     createYarnList(getWeftColors(), 'weft');
     if (document.getElementById('warp-list') || document.getElementById('weft-list')) {
-        document.getElementById('click-draft-yarn-list-container').style.pageBreakAfter = "always";
+       // document.getElementById('click-draft-yarn-list-container').style.pageBreakAfter = "always";
     }
 }
 function addInfo() {//Adds buttons for adding optional info to the draft
     let place = document.getElementById('options-container');
     let yarnButton = document.createElement('button');
     let projectButton = document.createElement('button');
+    let saveButton = document.createElement('button');
     yarnButton.textContent = 'Add yarn info';
     projectButton.textContent = 'Add project info';
+    saveButton.textContent = 'Save draft';
     yarnButton.addEventListener('click', () => generateYarnLists());
     projectButton.addEventListener('click', () => displayDraftInfo());
+    saveButton.addEventListener('click', () => saveDraft());
     place.appendChild(projectButton);
     place.appendChild(yarnButton)
+    place.appendChild(saveButton);
     addInputCalculations();
 
 
