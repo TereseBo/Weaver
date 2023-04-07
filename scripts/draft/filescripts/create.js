@@ -54,15 +54,8 @@ function exportWeft(grid) {//Loops trough the weft grid and exports the pattern 
     let colors = [];
 
     let rowNr = [];
-/*     document.querySelectorAll(`[data-grid="${grid}"]`).forEach(element => {
-        rowNr.push(element.dataset.row);
-    }); */
-    //rowNr = rowNr.max();
      rowNr = document.querySelectorAll(`[data-grid="${grid}"]:last-child`)//.dataset.row;
      rowNr=Math.max(...Array.from(rowNr).map(cell=>Number(cell.dataset.row)))
-     //rowNr=Math.max(...rowNr)
-     console.log(rowNr)
-   // let currentColumn = document.querySelectorAll(`[data-grid="${grid}"][data-column="${columnNr}"]`);
 
     let currentRow = document.querySelectorAll(`[data-grid="${grid}"][data-row="${rowNr}"]`);
     while (currentRow.length>0) {
@@ -87,7 +80,6 @@ function exportWeft(grid) {//Loops trough the weft grid and exports the pattern 
         });
         rowNr--;
         currentRow = document.querySelectorAll(`[data-grid="${grid}"][data-row="${rowNr}"]`);
-        console.log(currentRow)
     }
     colors.push({ color: previousColor, threads: colorPatternTracker + 1 });
     colors.shift();
@@ -99,7 +91,6 @@ function exportWeft(grid) {//Loops trough the weft grid and exports the pattern 
         object.count = null;
     }
     object.colors = colors
-    console.log(object)
     return object;
 
 }
