@@ -56,15 +56,22 @@ function exportWeft(grid) {//Loops trough the weft grid and exports the pattern 
     let previousColor = 0;
     let newColor = 0;
     let thredle = null;
+    let colors = [];
 
     let rowNr = [];
-    document.querySelectorAll(`[data-grid="${grid}"]`).forEach(element => {
+/*     document.querySelectorAll(`[data-grid="${grid}"]`).forEach(element => {
         rowNr.push(element.dataset.row);
-    });
-    rowNr = rowNr.max();
+    }); */
+    //rowNr = rowNr.max();
+     rowNr = document.querySelector(`[data-grid="${grid}"]:last-child`).dataset.row;
+     console.log(rowNr)
+   // let currentColumn = document.querySelectorAll(`[data-grid="${grid}"][data-column="${columnNr}"]`);
 
     let currentRow = document.querySelectorAll(`[data-grid="${grid}"][data-row="${rowNr}"]`);
+    console.log(currentRow)
+    debugger
     while (currentRow) {
+        let previousRow='';
         currentRow.forEach(element => {
             if (isActive(element)) {
                 //TODO: Add chek for dual treadling
