@@ -35,17 +35,12 @@ function exportWarp(grid) {//Loops trough the warp grid and exports the pattern 
     colors.shift();
 
     object.pattern = pattern;
-    console.log(object.pattern)
     if (pattern.length > 0) {
         object.count = Math.max(...pattern);
     } else {
         object.count = null;
     }
-    console.log(object.count)
     object.colors = colors
-    console.log(object.colors)
-    console.log(object);
-    console.log(object)
     return object;
 }
 
@@ -63,14 +58,14 @@ function exportWeft(grid) {//Loops trough the weft grid and exports the pattern 
         rowNr.push(element.dataset.row);
     }); */
     //rowNr = rowNr.max();
-     rowNr = document.querySelector(`[data-grid="${grid}"]:last-child`).dataset.row;
+     rowNr = document.querySelectorAll(`[data-grid="${grid}"]:last-child`)//.dataset.row;
+     rowNr=Math.max(...Array.from(rowNr).map(cell=>Number(cell.dataset.row)))
+     //rowNr=Math.max(...rowNr)
      console.log(rowNr)
    // let currentColumn = document.querySelectorAll(`[data-grid="${grid}"][data-column="${columnNr}"]`);
 
     let currentRow = document.querySelectorAll(`[data-grid="${grid}"][data-row="${rowNr}"]`);
-    console.log(currentRow)
-    debugger
-    while (currentRow) {
+    while (currentRow.length>0) {
         let previousRow='';
         currentRow.forEach(element => {
             if (isActive(element)) {
@@ -78,18 +73,47 @@ function exportWeft(grid) {//Loops trough the weft grid and exports the pattern 
                 newColor = element.style.backgroundColor;
                 thredle = element.dataset.column;
                 pattern.push(thredle);
+                previousRow=rowNr
                 if (newColor === previousColor) {
                     colorPatternTracker++;
+                    previousColor=newColor
                 } else {
-                    object.threadling.colors.pattern.push({ color: previousColor, threads: colorPatternTracker });
+                    colorPatternTracker++
+                    colors.push({ color: previousColor, threads: colorPatternTracker });
                     colorPatternTracker = 0;
                     previousColor = newColor;
                 }
             }
         });
-        rowNr++;
+        rowNr--;
         currentRow = document.querySelectorAll(`[data-grid="${grid}"][data-row="${rowNr}"]`);
+        console.log(currentRow)
     }
+    colors.push({ color: previousColor, threads: colorPatternTracker + 1 });
+    colors.shift();
+
+    object.pattern = pattern;
+    if (pattern.length > 0) {
+        object.count = Math.max(...pattern);
+    } else {
+        object.count = null;
+    }
+    object.colors = colors
+    console.log(object)
+    return object;
+
+}
+
+function download(filename, object){
+    const json= JSON.stringify(object)
+    let downloadLink=document.createElement('a')
+    downloadLink.setAttribute('href','data:text/plain;charset=utf-8,' + encodeURIComponent(json))
+    downloadLink.setAttribute('download', filename)
+    downloadLink.style.display='none'
+    document.body.appendChild(downloadLink)
+    downloadLink.click()
+    document.body.removeChild(downloadLink)
+
 
 }
 
@@ -97,6 +121,7 @@ function saveDraft() {//TODO: Finish this //Creates an object from a clicked in 
     let warp = exportWarp('shafts');
     let weft = exportWeft('thredles');
     let draft = { warp, weft };
+    download('mydraft.json',draft)
     console.log(draft);
 }
 
