@@ -1,5 +1,5 @@
 import { isActive } from './dchart.js';
-import { calculateWarpEnds, calculateWarpEpc, calculateWeaveWidth, calculateEpcFromReed } from './calc.js';
+import { calculateWarpEnds, calculateWarpEpc, calculateWeaveWidth, calculateEpcFromReed } from '../calc.js';
 function getWarpColors() {//returns a set of warp colors used in the draft
     let warpColors = [];
     let warpCells = Array.from(document.querySelectorAll('[data-grid=shafts]')).filter(isActive);

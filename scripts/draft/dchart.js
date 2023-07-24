@@ -17,8 +17,8 @@ function createGrid(x = 4, y = 4, id = "grid") {//Creates a grid with x columns 
             cell.setAttribute("Data-grid", id);
             let cellName = `${id}-${j}-${i}`;
             cell.setAttribute("id", cellName);
-            row.appendChild(cell);
-            onClickfunctionPicker(id, cell);
+            row.appendChild(cell);1
+            //onClickfunctionPicker(id, cell);
         }
     }
 }
@@ -51,9 +51,14 @@ function draftSetUp() {//Checks if user has set thredle/shaft preferences, if no
     createGrid(gridSizeX, shaftPreference, "shafts");
     createGrid(thredlePreference, gridSizeY, "thredles");
     createGrid(thredlePreference, shaftPreference, "tie-up");
+
+    document.querySelector('#chart').addEventListener("click", onClickfunctionPicker)
+
 cssunfucker();
     //adjustDraftDisplay(gridSizeX, gridSizeY, thredlePreference, shaftPreference);
 }
+
+
 //Functions active in draft-manipulation
 function getActiveColor() {//Returns the color of the color picker.
     let currentColor = document.getElementById('currentcolor').value;
@@ -91,31 +96,29 @@ function setBackgroundColor(cell, color = getActiveColor()) {//Sets the backgrou
     return result;
 }
 //TODO: move function to grid creation
-function onClickfunctionPicker(grid, cell) {//Switch to determine which function to run on click.
+
+function onClickfunctionPicker( event) {//Switch to determine which function to run on click.
+    const cell= event.target
+    const grid=cell.dataset.grid
     switch (grid) {
         case "draft":
             break;
         case "shafts":
-            cell.addEventListener("click", function () {
-                setBackgroundColor(this);
-                checkWarp(this);
-                calculateDraftfromShaft(this);
+            
+                setBackgroundColor(cell);
+                checkWarp(cell);
+                calculateDraftfromShaft(cell);
                 updateColorbox(getActiveColor(), 'warp');
-            });
             break;
         case "thredles":
-            cell.addEventListener("click", function () {
-                setBackgroundColor(this);
-                calculateDraftfromTredle(this);
+            
+                setBackgroundColor(cell);
+                calculateDraftfromTredle(cell);
                 updateColorbox(getActiveColor(), 'weft');
-
-            });
             break;
         case "tie-up":
-            cell.addEventListener("click", function () {
                 setBackgroundColor(cell, "black");
-                calculateDraftfromTieUp(this);
-            });
+                calculateDraftfromTieUp(cell);
             break;
         default:
             break;
