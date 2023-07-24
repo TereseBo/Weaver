@@ -59,7 +59,7 @@ function createYarnList(arr, thread) {//creates a list of yarns for the warp or 
             yarnList.appendChild(yarnContainer);
         });
         window.scrollTo(0, document.body.scrollHeight);
-    } else { /* //TODO: Consider if message should be displayd when yarns are not set
+    } else {  //TODO: Consider if message should be displayd when yarns are not set
         let yarnList = document.createElement('div');
         yarnList.id = `${thread}-list`;
         yarnList.classList.add('yarn-list');
@@ -71,7 +71,7 @@ function createYarnList(arr, thread) {//creates a list of yarns for the warp or 
         let yarnmessagebox=document.createElement('div')
         let msg='Not selected'
         yarnList.appendChild(yarnmessagebox).textContent=msg;
-        window.scrollTo(0, document.body.scrollHeight); */
+        window.scrollTo(0, document.body.scrollHeight); 
     }
 }
 function generateYarnLists() {//generates the warp and weft yarn lists
@@ -131,7 +131,6 @@ function addInputCalculations() {//Adds calculations to the input fields
             warpEndsInput.value = calculateWarpEnds(warpEpc, warpWidth);
 
         }
-        console.log(checkInputMatch(warpEpc, reedFactor))
         if (checkInputMatch(warpEpc, reedFactor)) { //TODO: clean this mess up and add corresponding class in styles
             reedelement.forEach(element => {
 
@@ -201,9 +200,6 @@ function addInputCalculations() {//Adds calculations to the input fields
 function checkInputMatch(val1, val2) {//Checks if values are compatible
 
     let res = true
-    console.log(val1)
-    console.log(val2)
-    console.log(val1 % val2)
     if (val1 % val2 == 0 || val2 % val1 == 0) {
         res = true
     } else {
