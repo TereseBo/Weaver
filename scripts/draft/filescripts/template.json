@@ -1,0 +1,33 @@
+{
+    "shafts": {
+        "count": "nr",
+        "pattern": [],
+        "pattern_repeat": "nr",
+        "selvage":{
+            "pattern": "nr",
+            "pattern_repeat": "nr"
+        },
+        "colors":[
+            {"comment":"specified as {'color':'rgb(0,0,0)','threads':'nr'}"}
+        ]
+    },
+    "treadling": {
+        "count": "nr",
+        "pattern": [[]],
+        "pattern_repeat": "nr",
+        "selvage":{
+            "pattern": "nr",
+            "pattern_repeat": "nr"
+        },
+        "colors":[
+            {"comment":"specified as {'color':'rgb(0,0,0)','threads':'nr'}"}
+        ]
+
+    },
+    "tieup": {
+        
+        "pattern": []
+
+    },
+    "threads":"nr"
+}

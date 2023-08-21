@@ -1,5 +1,6 @@
 //Functions in grid creation
 import { updateColorbox } from "./colorpick.js";
+
 function createGrid(x = 4, y = 4, id = "grid") {//Creates a grid with x columns and y rows, with the id of id and appends to id="chart"
     let grid = document.createElement('div');
     grid.setAttribute("id", `${id}-wrapper`);
@@ -17,7 +18,7 @@ function createGrid(x = 4, y = 4, id = "grid") {//Creates a grid with x columns 
             cell.setAttribute("Data-grid", id);
             let cellName = `${id}-${j}-${i}`;
             cell.setAttribute("id", cellName);
-            row.appendChild(cell);1
+            row.appendChild(cell);
             //onClickfunctionPicker(id, cell);
         }
     }
@@ -40,46 +41,49 @@ function adjustDraftDisplay(gridSizeX, gridSizeY, thredlePreference, shaftPrefer
     tieUp.style.gridRowEnd = (draftAreaHeight);
     tieUp.style.gridColumnEnd = (draftAreaWidth);
 }
-function draftSetUp() {//Checks if user has set thredle/shaft preferences, if not uses 4 as default. Navigation to draft.html and creation og grid.
+function getShaftPreference() {//Returns the number of shafts the user has set.
     let shaftPreference;
-    let thredlePreference;
     (localStorage.getItem('shaftInput')) ? shaftPreference = localStorage.getItem('shaftInput') : shaftPreference = 4;
+    return shaftPreference;
+}
+function getThredlePreference() {//Returns the number of thredles the user has set.
+    let thredlePreference;
     (localStorage.getItem('thredleInput')) ? thredlePreference = localStorage.getItem('thredleInput') : thredlePreference = 4;
-    let gridSizeX = 50;
-    let gridSizeY = 50;
-    createGrid(gridSizeX, gridSizeY, "draft"); //TODO: add possibility to choose gridsize for draft
-    createGrid(gridSizeX, shaftPreference, "shafts");
-    createGrid(thredlePreference, gridSizeY, "thredles");
-    createGrid(thredlePreference, shaftPreference, "tie-up");
-
-    document.querySelector('#chart').addEventListener("click", onClickfunctionPicker)
-
-cssunfucker();
-    //adjustDraftDisplay(gridSizeX, gridSizeY, thredlePreference, shaftPreference);
+    return thredlePreference;
 }
 
 
+function draftSetUp(shaftPreference, thredlePreference, gridSizeX=50, gridSizeY=50) {//Checks if user has set thredle/shaft preferences, if not uses 4 as default. Navigation to draft.html and creation og grid.
+
+    createGrid(gridSizeX, gridSizeY, "draft"); 
+    createGrid(gridSizeX, shaftPreference, "shafts");
+    createGrid(thredlePreference, gridSizeY, "thredles");
+    createGrid(thredlePreference, shaftPreference, "tie-up");
+    document.querySelector('#chart').addEventListener("click", onClickfunctionPicker) //NEW
+    cssunfucker();
+    //adjustDraftDisplay(gridSizeX, gridSizeY, thredlePreference, shaftPreference);
+}
 //Functions active in draft-manipulation
 function getActiveColor() {//Returns the color of the color picker.
     let currentColor = document.getElementById('currentcolor').value;
     return currentColor;
 }
-function cssunfucker(){
+function cssunfucker() {
     let draft = document.getElementById('draft-wrapper');
     let shafts = document.getElementById('shafts-wrapper');
     let thredles = document.getElementById('thredles-wrapper');
     let tieUp = document.getElementById('tie-up-wrapper');
-let chart = document.getElementById('chart');
-let div=document.createElement('div');
-let div2=document.createElement('div');
-div.setAttribute("class",'partial');
-div2.setAttribute("class",'partial');
-div.appendChild(draft);
-div.appendChild(thredles);
-chart.appendChild(div);
-div2.appendChild(shafts);
-div2.appendChild(tieUp);
-chart.appendChild(div2);
+    let chart = document.getElementById('chart');
+    let div = document.createElement('div');
+    let div2 = document.createElement('div');
+    div.setAttribute("class", 'partial');
+    div2.setAttribute("class", 'partial');
+    div.appendChild(draft);
+    div.appendChild(thredles);
+    chart.appendChild(div);
+    div2.appendChild(shafts);
+    div2.appendChild(tieUp);
+    chart.appendChild(div2);
 }
 
 
@@ -89,16 +93,16 @@ function setBackgroundColor(cell, color = getActiveColor()) {//Sets the backgrou
         cell.style.backgroundColor = color;
 
     } else {
-     
+
         cell.style.backgroundColor = cell.parentElement.style.backgroundColor;//TODO:add function to reset grid-color on color-reset
 
     }
     return result;
 }
 //TODO: move function to grid creation
-
-function onClickfunctionPicker( event) {//Switch to determine which function to run on click.
-    const cell= event.target
+function onClickfunctionPicker(event) {//Switch to determine which function to run on click.
+    const cell=event.target
+    console.log(cell)
     const grid=cell.dataset.grid
     switch (grid) {
         case "draft":
@@ -109,22 +113,27 @@ function onClickfunctionPicker( event) {//Switch to determine which function to 
                 checkWarp(cell);
                 calculateDraftfromShaft(cell);
                 updateColorbox(getActiveColor(), 'warp');
+            
             break;
         case "thredles":
             
                 setBackgroundColor(cell);
                 calculateDraftfromTredle(cell);
                 updateColorbox(getActiveColor(), 'weft');
+
+            
             break;
         case "tie-up":
+           
                 setBackgroundColor(cell, "black");
                 calculateDraftfromTieUp(cell);
+            
             break;
         default:
             break;
     }
 }
-function checkWarp(cell) {
+function checkWarp(cell) {//Resets background color of cells in the same column.
     let columnNr = cell.dataset.column;
     let grid = cell.dataset.grid;
     let currentColumn = document.querySelectorAll(`[data-grid="${grid}"][data-column="${columnNr}"]`);
@@ -177,7 +186,7 @@ function calculateDraftfromDraft(cell) {
     if (warpCell && weftCells.length > 0) {
 
         let tiedUpCells = findSameRowIn(warpCell, 'tie-up').filter(isActive);
-  
+
         if (tiedUpCells.length > 0) {
 
             let tieUps = tiedUpCells.map(cell => cell.dataset.column);
@@ -207,7 +216,7 @@ function calculateDraftfromDraft(cell) {
         cell.style.backgroundColor = weftCells[0].style.backgroundColor;
         cell.dataset.thread = "weft";
     }
-    else if(!warpCell && weftCells.length === 0){
+    else if (!warpCell && weftCells.length === 0) {
         cell.style.backgroundColor = cell.parentElement.style.backgroundColor;
         cell.dataset.thread = "none";
     }
@@ -218,9 +227,9 @@ function fixGridLines(cell) {
     let borderThickness = "0.5px";
     if (cell.dataset.thread === "warp") {
         cell.style.borderTop = "none";
-        cell.style.borderTopColor="";
+        cell.style.borderTopColor = "";
         cell.style.borderBottom = "none";
-        cell.style.borderBottomColor="";
+        cell.style.borderBottomColor = "";
         cell.style.borderLeft = "";
         cell.style.borderRight = "";
         cell.style.borderTopWidth = "";
@@ -232,9 +241,9 @@ function fixGridLines(cell) {
     }
     else if (cell.dataset.thread === "weft") {
         cell.style.borderLeft = "none";
-        cell.style.borderLeftColor="";
+        cell.style.borderLeftColor = "";
         cell.style.borderRight = "none";
-        cell.style.borderRightColor="";
+        cell.style.borderRightColor = "";
         cell.style.borderTop = "";
         cell.style.borderBottom = "";
         cell.style.borderLeftWidth = "";
@@ -242,7 +251,7 @@ function fixGridLines(cell) {
         cell.style.borderTopWidth = borderThickness;
         cell.style.borderBottomWidth = borderThickness;
     }
-    else{
+    else {
         cell.style.borderLeft = "";
         cell.style.borderRight = "";
         cell.style.borderTop = "";
@@ -253,7 +262,7 @@ function fixGridLines(cell) {
         cell.style.borderBottomWidth = "";
     }
 }
-export { draftSetUp, isActive};
+export { draftSetUp, isActive, getThredlePreference, getShaftPreference };
 
 
 

@@ -1,5 +1,7 @@
 import { isActive } from './dchart.js';
-import { calculateWarpEnds, calculateWarpEpc, calculateWeaveWidth, calculateEpcFromReed } from '../calc.js';
+import { calculateWarpEnds, calculateWarpEpc, calculateWeaveWidth, calculateEpcFromReed } from '../../calculator/calc.js';
+import { saveDraft } from '../filescripts/create.js';
+
 function getWarpColors() {//returns a set of warp colors used in the draft
     let warpColors = [];
     let warpCells = Array.from(document.querySelectorAll('[data-grid=shafts]')).filter(isActive);
@@ -59,7 +61,7 @@ function createYarnList(arr, thread) {//creates a list of yarns for the warp or 
             yarnList.appendChild(yarnContainer);
         });
         window.scrollTo(0, document.body.scrollHeight);
-    } else { /* //TODO: Consider if message should be displayd when yarns are not set
+    } else {  //TODO: Consider if message should be displayd when yarns are not set
         let yarnList = document.createElement('div');
         yarnList.id = `${thread}-list`;
         yarnList.classList.add('yarn-list');
@@ -71,7 +73,7 @@ function createYarnList(arr, thread) {//creates a list of yarns for the warp or 
         let yarnmessagebox=document.createElement('div')
         let msg='Not selected'
         yarnList.appendChild(yarnmessagebox).textContent=msg;
-        window.scrollTo(0, document.body.scrollHeight); */
+        window.scrollTo(0, document.body.scrollHeight); 
     }
 }
 function generateYarnLists() {//generates the warp and weft yarn lists
@@ -86,19 +88,23 @@ function generateYarnLists() {//generates the warp and weft yarn lists
     createYarnList(getWarpColors(), 'warp');
     createYarnList(getWeftColors(), 'weft');
     if (document.getElementById('warp-list') || document.getElementById('weft-list')) {
-        document.getElementById('click-draft-yarn-list-container').style.pageBreakAfter = "always";
+       // document.getElementById('click-draft-yarn-list-container').style.pageBreakAfter = "always";
     }
 }
 function addInfo() {//Adds buttons for adding optional info to the draft
     let place = document.getElementById('options-container');
     let yarnButton = document.createElement('button');
     let projectButton = document.createElement('button');
+    let saveButton = document.createElement('button');
     yarnButton.textContent = 'Add yarn info';
     projectButton.textContent = 'Add project info';
+    saveButton.textContent = 'Save draft';
     yarnButton.addEventListener('click', () => generateYarnLists());
     projectButton.addEventListener('click', () => displayDraftInfo());
+    saveButton.addEventListener('click', () => saveDraft());
     place.appendChild(projectButton);
     place.appendChild(yarnButton)
+    place.appendChild(saveButton)
     addInputCalculations();
 
 
@@ -110,7 +116,7 @@ function displayDraftInfo() {//Displays the project info form
 
 }
 
-function addInputCalculations() {//Adds calculations to the input fields
+function addInputCalculations() {//Adds calculations to the input fields it's very unclear why I didn't do one function for the form instead
     let warpEpcInput = document.getElementById('warp-sett');
     let warpEndsInput = document.getElementById('threads');
     let warpWidthInput = document.getElementById('warp-width');
@@ -131,7 +137,6 @@ function addInputCalculations() {//Adds calculations to the input fields
             warpEndsInput.value = calculateWarpEnds(warpEpc, warpWidth);
 
         }
-        console.log(checkInputMatch(warpEpc, reedFactor))
         if (checkInputMatch(warpEpc, reedFactor)) { //TODO: clean this mess up and add corresponding class in styles
             reedelement.forEach(element => {
 
@@ -143,6 +148,7 @@ function addInputCalculations() {//Adds calculations to the input fields
 
             })
         }
+        console.log(warpEpc, reedSett.value)
         if (checkInputMatch(warpEpc, reedSett.value)) {
             reedSett.classList.remove('red')
         } else {
@@ -198,12 +204,11 @@ function addInputCalculations() {//Adds calculations to the input fields
 
 
 }
+
+//TODO: Replace this function with one that considers seed, sett and ends/cm
 function checkInputMatch(val1, val2) {//Checks if values are compatible
 
     let res = true
-    console.log(val1)
-    console.log(val2)
-    console.log(val1 % val2)
     if (val1 % val2 == 0 || val2 % val1 == 0) {
         res = true
     } else {
@@ -213,4 +218,4 @@ function checkInputMatch(val1, val2) {//Checks if values are compatible
 }
 
 
-export { addInfo }
+export { addInfo, addInputCalculations }
