@@ -61,7 +61,7 @@ function createYarnList(arr, thread) {//creates a list of yarns for the warp or 
             yarnList.appendChild(yarnContainer);
         });
         window.scrollTo(0, document.body.scrollHeight);
-    } else { /* //TODO: Consider if message should be displayd when yarns are not set
+    } else {  //TODO: Consider if message should be displayd when yarns are not set
         let yarnList = document.createElement('div');
         yarnList.id = `${thread}-list`;
         yarnList.classList.add('yarn-list');
@@ -73,7 +73,7 @@ function createYarnList(arr, thread) {//creates a list of yarns for the warp or 
         let yarnmessagebox=document.createElement('div')
         let msg='Not selected'
         yarnList.appendChild(yarnmessagebox).textContent=msg;
-        window.scrollTo(0, document.body.scrollHeight); */
+        window.scrollTo(0, document.body.scrollHeight); 
     }
 }
 function generateYarnLists() {//generates the warp and weft yarn lists
@@ -137,7 +137,6 @@ function addInputCalculations() {//Adds calculations to the input fields it's ve
             warpEndsInput.value = calculateWarpEnds(warpEpc, warpWidth);
 
         }
-        console.log(checkInputMatch(warpEpc, reedFactor))
         if (checkInputMatch(warpEpc, reedFactor)) { //TODO: clean this mess up and add corresponding class in styles
             reedelement.forEach(element => {
 
