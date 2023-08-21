@@ -1,6 +1,8 @@
 import { isZeroish } from './calc.js';
 import { calculateFixedLength, calculateItemsLength, warpLength } from './calc.js';
 
+import {addInputCalculations} from '../draft/pagescripts/dinfo.js'
+
 function addItemToWarp(itemNr) {//Adds and numbers an item to warp length calculator
     const itemBox = document.getElementById("item-box");
     let clone = itemBox.cloneNode(true);
@@ -58,9 +60,7 @@ function recalculateLength() {//Recalculates length of warp
     document.getElementById("total").value = length;
 }
 
-
 function addEventListenersWarpLength() {
-    console.log("change")
     document.getElementById("items").addEventListener("input", (e) => {//Adds/removes items from warp length calculator
         let visibleItems = countChildren('items-container');
         visibleItems <= e.target.value ? addElements(visibleItems, e.target.value, addItemToWarp) : removeElements(e.target.value, visibleItems, removeItemFromWarp);
@@ -72,6 +72,6 @@ function addEventListenersWarpLength() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {//Runs after page-load
-    console.log("calcPage.js loaded");
     addEventListenersWarpLength();
+    addInputCalculations()
 });

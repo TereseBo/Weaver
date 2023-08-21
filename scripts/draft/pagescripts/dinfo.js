@@ -149,6 +149,7 @@ function addInputCalculations() {//Adds calculations to the input fields it's ve
 
             })
         }
+        console.log(warpEpc, reedSett.value)
         if (checkInputMatch(warpEpc, reedSett.value)) {
             reedSett.classList.remove('red')
         } else {
@@ -204,12 +205,11 @@ function addInputCalculations() {//Adds calculations to the input fields it's ve
 
 
 }
+
+//TODO: Replace this function with one that considers seed, sett and ends/cm
 function checkInputMatch(val1, val2) {//Checks if values are compatible
 
     let res = true
-    console.log(val1)
-    console.log(val2)
-    console.log(val1 % val2)
     if (val1 % val2 == 0 || val2 % val1 == 0) {
         res = true
     } else {
@@ -219,4 +219,4 @@ function checkInputMatch(val1, val2) {//Checks if values are compatible
 }
 
 
-export { addInfo }
+export { addInfo, addInputCalculations }
