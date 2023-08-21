@@ -27,7 +27,6 @@ function calculateEpcFromReed(dents, cm, threads){
 
 //Calculations relating to length
 function calculateItemsLength( items, weaveIn, shrink){
-    console.log(items)
     items=items.reduce((a,b)=>Number(a)+Number(b),0)
     items= items*(1+weaveIn/100)
     items= items*(1+shrink/100)
