@@ -437,12 +437,14 @@ side-bar{
   display: flex;
 }
 #calculator .info-form {
+  background-color: aliceblue;
+  color: rgb(58, 9, 90);
+  border: 1px solid rgb(58, 9, 90);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1rem;
   margin: 1rem;
-  background-color: aquamarine;
   margin: auto;
   padding: 1rem;
 }
@@ -450,17 +452,16 @@ side-bar{
   display: flex;
   width: 100%;
 }
-#calculator .info-form .data label {
+#calculator .info-form .data label:first-of-type {
   margin: 0;
   padding: 0;
-  width: 50%;
   min-width: 100px;
   text-align: end;
   margin-right: 1rem;
   white-space: nowrap;
 }
 #calculator .info-form .data input {
-  margin: 0 0.5rem 0 0;
+  margin: 0 0.2rem 0 0.5rem;
   padding: 0;
   text-align: center;
 }

@@ -13,38 +13,44 @@
 
 <body>
     <header>
-        <h1> Welcome to the weaving project creator!</h1>
-        <p> Start by registering your project information. If you don't know what you're making yet, go to draft
-            instead.</p>
+    <h1> Welcome to the weaving project creator!</h1>
+    <p> Start by registering your loom information. If you already have go straight to draft.</p>
 
-        <nav id="menu">
-            <a href="./index.html">Home</a>
-            <a href="./calculator.html">Calculator</a>
-        </nav>
-    </header>
+    <nav id="menu">
+    <button id="preferences">
+        Register preferences
+    </button>
+    <a href='./draft.html'>
+        Create draft
+    </a>
+    <a href="./calculator.html">Calculator</a>
+
+
+</nav>
+</header>
     <div id="calculator">
 
 
-        <form class="info-form">
+        <form class="info-form" id="warplength-form">
             <h3>Warp Length</h3>
             <div class="data">
-                <label for="threads-heddle">Loom waste </label>
+                <label for="threads-heddle">Loom waste: </label>
                 <input type="number" data-unit="cm" id="loom-waste" name="loom-waste" min="1" max="99" value="10"> cm
             </div>
             <div class="data">
-                <label for="lash-on">Lashing on </label>
+                <label for="lash-on">Lashing on: </label>
                 <input type="number" data-unit="cm" id="lash-on" name="lash-on" min="1" max="99" value="10"> cm
             </div>
             <div class="data">
-                <label for="Take-up">Take-up </label>
+                <label for="Take-up">Take-up: </label>
                 <input type="number" data-unit="%" id="take-up" name="take-up" min="1" max="99" value="10"> %
             </div>
             <div class="data">
-                <label for="shrinkage">Shrinkage </label>
+                <label for="shrinkage">Shrinkage: </label>
                 <input type="number" data-unit="%" id="shrinkage" name="shrinkage" min="1" max="50" value="10"> %
             </div>
             <div class="data">
-                <label for="items">Nr of items </label>
+                <label for="items">Nr of items: </label>
                 <input type="number" id="items" name="items" min="1" max="99" placeholder="0">
             </div>
             <div id="items-container">
@@ -52,16 +58,18 @@
                     <h6>Item</h6>
 
                     <div class="data">
-                        <label for="width">Item length</label>
-                        <input type="number" data-unit="cm" id="length" name="width" min="1" max="99" value="10"> cm
+                        <label for="width">Item length:</label>
+                        <input type="number" data-unit="cm" id="length" name="length" min="1" max="99" value="10"> cm
                     </div>
                     <div class="data">
-                        <label for="width">Fringe / hem</label>
-                        <input type="number" data-unit="cm" id="firsthem" name="firsthem" min="1" max="99" value="10"> cm
+                        <label for="width">Fringe / hem:</label>
+                        <input type="number" data-unit="cm" id="firsthem" name="firsthem" min="1" max="99" value="10">
+                        cm
                     </div>
                     <div class="data">
-                        <label for="width">Fringe / hem</label>
-                        <input type="number" data-unit="cm" id="secondhem" name="secondhem" min="1" max="99" value="10"> cm
+                        <label for="width">Fringe / hem:</label>
+                        <input type="number" data-unit="cm" id="secondhem" name="secondhem" min="1" max="99" value="10">
+                        cm
                     </div>
 
 
@@ -69,13 +77,66 @@
                 </div>
             </div>
             <div class="data">
-                <label for="total">Warp length </label>
+                <label for="total">Warp length: </label>
                 <input type="number" id="total" name="total" min="1" max="99" value="940">
             </div>
 
 
 
         </form>
+
+
+        <form class="info-form">
+            <label class="form-header">Details</label>
+
+
+            <div class="data">
+                <label>Reed:</label>
+                <input type="number" id="heddle-dents" name="heddle" min="1" max="100" value="50">
+                /
+                <input type="number" id="heddle-spec" name="heddle" min="1" max="100" value="10"> cm
+            </div>
+
+
+
+            <div class="data">
+                <label>Threding:</label>
+                <input type="number" id="threads-heddle" name="tieup" min="1" max="10" value="1">
+
+                <label for="threads-heddle">/heddle </label>
+                <input type="number" id="threads-dent" name="tieup" min="1" max="10" value="2">
+                <label for="threads-dent">/dent </label>
+            </div>
+
+
+
+            <div class="data">
+                <label>Ends/cm:</label>
+                <label for="warp-sett">warp </label>
+                <input type="number" id="warp-sett" name="warp-sett" min="1" max="100" value="10">
+                <label for="weft-sett">weft </label>
+                <input type="number" id="weft-sett" name="weft-sett" min="1" max="100" value="10">
+            </div>
+
+
+
+            <div class="data">
+                <label>Ends total:</label>
+                <label for="threads">threads </label>
+                <input type="number" id="threads" name="threads" min="1" max="2000" value="750" style="width: 4ex">
+            </div>
+
+
+
+            <div class="data">
+                <label>Weave width:</label>
+                <input type="number" id="warp-width" name="warp" min="1" max="300" value="100" style="width: 5ex">
+                <label for="warp-width">cm </label>
+            </div>
+
+        </form>
+
+
 
 
 
